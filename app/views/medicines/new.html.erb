@@ -1,0 +1,52 @@
+   <!-- Medicine Form-->
+<div class="form-group">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+            <h2> Medicine Details </h2>
+            
+            <%= simple_form_for @medicine do |f| %>
+              <%= f.error_notification %>
+              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+                
+              <div class="mb-3">
+                <%= f.label :name, { class: "form-label"} %>
+                <%= f.text_field :name, { class: "form-control", placeholder: "Medicine Name" } %>
+              </div>
+                
+              <div class="mb-3">
+                <%= f.label :description, { class: "form-label"} %>
+                <%= f.text_field :description, { class: "form-control", placeholder: "Medicine Description" } %>
+              </div>
+              
+              <div class="mb-3">
+                <%= f.label :quantity, { class: "form-label"} %>
+                <%= f.text_field :quantity, { class: "form-control", placeholder: "Medicine Quantity" } %>
+              </div>
+                
+              <div class="mb-3">
+                <%= f.label :price, { class: "form-label"} %>
+                <%= f.text_field :price, { class: "form-control", placeholder: "Medicine Price" } %>
+              </div>
+              
+              <div class="mb-3">
+                <div class="field"><%= f.input :manfucturing_date %></div>
+              </div>
+                
+              <div class="mb-3">
+                <div class="field"><%= f.input :expiry_date %></div>
+              </div>
+               
+              <div class="mb-3">
+                <div><%= f.submit "Save", class: "btn btn-primary" %></div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

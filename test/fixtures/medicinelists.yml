@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medicine_id: 1
+  medicine1: MyString
+  medicine2: MyString
+  medicine3: MyString
+  medicine4: MyString
+  medicine5: MyString
+
+two:
+  medicine_id: 1
+  medicine1: MyString
+  medicine2: MyString
+  medicine3: MyString
+  medicine4: MyString
+  medicine5: MyString

@@ -1,0 +1,11 @@
+         <!--Searched Medicine Table--> 
+
+<% if @search_medicine.present? %>
+  <ul>
+    <% @search_medicine&.each_with_index do |medicine, index| %>
+    <li>
+      <%= link_to medicine.name, medicine_url(medicine)%>
+    </li>
+<% end %>
+  </ul>
+<% end %>

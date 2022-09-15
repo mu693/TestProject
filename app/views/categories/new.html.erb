@@ -1,0 +1,50 @@
+            <!--Categories-->
+<div class="form-group">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <h1>Categories</h1>
+        <div class="card">
+          <div class="card-body">
+          
+            <%= simple_form_for(@category)do |f| %>
+              <%= f.error_notification %>
+              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          
+              <h5>Categories</h5>
+
+              <div class="mb-3">
+                <%= f.label :name, { class: "form-label" } %>
+                <%= f.text_field :name, { class: "form-control", placeholder: "Category Name" } %>
+              </div>
+
+              <div class="mb-3">  
+                <%= f.association :disease,  
+                  label_method: lambda { |disease| "#{disease.name}"},
+                  :label => "Select Disease:",
+                  as: :select, 
+                  input_html: { class: "value-selector" },
+                  item_wrapper_class: 'value-item select-2'
+                %>
+              </div>
+
+               <div class="mb-3">
+                  <%= f.association :medicine,
+                    label_method: lambda { |medicines| "#{medicines.name} - #{medicines.description}"},
+                    :label => "Select Medicines:",
+                    as: :select, 
+                    input_html: { class: "value-selector" },
+                    item_wrapper_class: 'value-item select-2'
+                  %>
+                </div>
+          
+              <div class="form-actions">
+                <%= f.button :submit, class:"btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>              

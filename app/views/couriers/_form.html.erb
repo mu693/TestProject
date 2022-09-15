@@ -1,0 +1,17 @@
+<%= simple_form_for(model: courier) do |form| %>
+  <% if courier.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(courier.errors.count, "error") %> prohibited this courier from being saved:</h2>
+
+      <ul>
+        <% courier.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

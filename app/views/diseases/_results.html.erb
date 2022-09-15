@@ -1,0 +1,12 @@
+  <!--Searched Diseases Table-->
+
+<% if @search_disease.present? %>
+  <ul>
+    <% @search_disease&.each_with_index do |disease, index| %>
+    <li>
+      <%= link_to disease.name, disease_url(disease)%>
+    </li>
+<% end %>
+  </ul>
+<% end %>
+

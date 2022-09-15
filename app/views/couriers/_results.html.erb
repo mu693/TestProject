@@ -1,0 +1,12 @@
+  <!--Searched Couriers Table-->
+  
+<% if @search_courier.present? %>
+  <ul>
+    <% @search_courier&.each_with_index do |courier, index| %>
+    <li>
+      <%= link_to courier.name, courier_url(courier)%>
+    </li>
+<% end %>
+  </ul>
+<% end %>
+

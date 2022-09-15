@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medicine_name: MyString
+  medicine_vendor: MyString
+  medicine_quantity: 1
+  medicine_manufacture: 2022-07-18
+
+two:
+  medicine_name: MyString
+  medicine_vendor: MyString
+  medicine_quantity: 1
+  medicine_manufacture: 2022-07-18

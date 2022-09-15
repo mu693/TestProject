@@ -1,0 +1,13 @@
+  <!--Search field-->
+<div class="row float-right">
+  <div class="col-md-12 bg-light text-right id=search-form">
+    <p>Search:</p>
+    <%= form_tag(diseases_path, method: "get", remote: true) do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Enter Disease name", class: "form-control", autocomplete: "off" %>
+    <% end %> 
+
+    <div id="index">
+      <%= render 'diseases/results' %>
+    </div>  
+  </div>  
+</div>

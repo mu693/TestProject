@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <h2>Welcome to RoofTopClinic</h2>
+      <div class="card">
+        <div class="card-body">
+          <h6>Signed In User</h6>
+          <% if current_user.avatar.present? %>
+            <%= image_tag(current_user.avatar, width: 100, height: 100) %>
+          <% else %>
+            <h5>No Image</h5>
+          <% end %>
+          <h6>First Name:   <%= current_user.name %></h6>
+          <h6>Last Name:   <%= current_user.lname %></h6>
+          <h6>Email:   <%= current_user.email %></h6>
+        </div>             
+      </div>
+    </div>
+  </div>
+</div>

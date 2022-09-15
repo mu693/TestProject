@@ -1,0 +1,49 @@
+  <!-- All Couriers Record -->
+  
+<div class="container">
+  <h2>Couriers</h2>
+
+  <%= render 'couriers/search' %>
+ 
+  <br /><br /><br /><br /><br /><br /><br /><br />
+
+  <div id="disease-table">
+    <div class="container fluid">
+      <div class="row">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Sr. #</th>
+              <th>Courier Name</th>
+              <th>Courier Address</th>
+              <th>Courier Code</th>
+              <th>Courier Contact Number</th>
+              <th colspan="3">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <%- @couriers.each_with_index do |courier, index| %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= courier.name %></td>
+                <td><%= courier.address %></td>
+                <td><%= courier.code %></td>
+                <td><%= courier.contact_no %></td>
+                <td><%= link_to "Edit", edit_courier_url(courier), class: "btn btn-warning float-right"%></td>
+                <td><%= link_to "Show", courier_url(courier), class: "btn btn-success float-right"%></td>
+                <td><%= button_to 'Delete', courier_path(courier), class: "btn btn-danger float-right", method: 'delete' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+              <!--Pagination-->
+      <%== pagy_bootstrap_nav(@pagy) %>
+
+      <%= link_to "Add New Courier", new_courier_path, class: "btn btn-primary" %>
+      <%= link_to 'Back', url_for(:back), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div> 
+

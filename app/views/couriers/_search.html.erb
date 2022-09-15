@@ -1,0 +1,13 @@
+  <!--Search field-->
+<div class="row float-right">
+  <div class="col-md-12 bg-light text-right id=search-form">
+    <p>Search:</p>
+    <%= form_tag(couriers_path, method: "get", remote: true) do %>
+      <%= text_field_tag :search, params[:search], autocomplete: "off" , placeholder: "Enter Couriers name", class: "form-control" %>
+    <% end %>   
+    
+    <div id="index">
+      <%= render 'couriers/results' %>
+    </div>  
+  </div>
+</div>
