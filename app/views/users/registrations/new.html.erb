@@ -22,12 +22,12 @@
               <label>Last Name</label>
               <%= f.text_field :lname, autofocus: true, autocomplete: "lname" %>
             </div>
-            
+
             <div class="mb-3">
               <%= f.label :email, { class: "form-label" } %><br>
               <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
             </div>
-            
+
             <div class="mb-3">
               <%= f.label :password, { class: "form-label" } %><br>
               <% if @minimum_password_length %>
@@ -35,18 +35,22 @@
               <% end %>
                   <%= f.password_field :password, autocomplete: "new-password" %>
             </div>
-            
+
             <div class="mb-3">
               <%= f.label :password_confirmation, { class: "form-label" } %><br>
               <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
             </div>
-            
+
             <div class="mb-3">
               <div class="actions">
                 <%= f.submit "Sign up", class: "btn btn-primary" %>
               </div>
             </div>
-            
+
+            <div class="mb-3">
+              <%= link_to "Login", new_user_session_path, class: "btn btn-secondary", method: :get %>
+            </div>
+
             <%= render "users/shared/links" %>
           </div>
         </div>

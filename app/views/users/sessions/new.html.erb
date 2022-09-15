@@ -6,31 +6,36 @@
         <div class="card">
           <div class="card-body">
             <h2>Log in</h2>
-           
+
             <div class="mb-3">
               <%= f.label :email, { class: "form-label" } %><br />
               <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
             </div>
-           
+
             <div class="mb-3">
               <%= f.label :password, { class: "form-label" } %><br />
               <%= f.password_field :password, autocomplete: "current-password" %>
             </div>
-           
+
             <div class="mb-3">
               <% if devise_mapping.rememberable? %>
                 <%= f.check_box :remember_me, { class: "form-label" } %>
                 <%= f.label :remember_me, { class: "form-label" } %>
               <% end %>
             </div>
-           
+
             <div class="mb-3">
               <div class="actions">
                 <%= f.submit "Log in", class: "btn btn-primary" %>
               </div>
             </div>
-           
+
+            <div class="mb-3">
+              <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success", method: :get %>
+            </div>
+
             <%= render "users/shared/links" %>
+
           </div>
         </div>
       </div>

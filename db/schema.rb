@@ -46,6 +46,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
     t.bigint "disease_id", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_type"
+    t.integer "category_type1"
     t.string "name"
     t.bigint "medicine_id"
     t.bigint "user_id"
@@ -61,7 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
     t.integer "contact_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_couriers_on_user_id"
   end
 
@@ -71,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_diseases_on_user_id"
   end
 
@@ -93,7 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
     t.date "expiry_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_medicines_on_user_id"
   end
 
@@ -119,8 +121,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "lname"
-    t.string "image"
-    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
