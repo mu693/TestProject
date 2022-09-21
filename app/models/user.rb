@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :diseases
   has_many :medicines
   has_many :couriers
+  has_many :categories
  
   has_one_attached :avatar 
 

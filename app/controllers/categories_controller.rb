@@ -6,17 +6,17 @@ class CategoriesController < ApplicationController
   # GET /categories or /categories.json
   def index
  
-  @pagy, @categories = pagy(Category.all)
+  @pagy, @categories = pagy(current_user.categories)
 
     if params[:search].present?
-      @search_category = Category.where("name ILIKE ?", "%#{params[:search]}%")
+      @search_category = current_user.categories.where("name ILIKE ?", "%#{params[:search]}%")
 
       respond_to do |format|
         format.js
       end
     else
     end  
-
+ 
   end
   
   # GET /categories/new
@@ -27,7 +27,7 @@ class CategoriesController < ApplicationController
   
   # POST /categories or /categories.json
   def create
-    @category = Category.new(category_params)
+    @category = current_user.categories.new(category_params)
    
     #debugger
     respond_to do |format|
@@ -43,12 +43,12 @@ class CategoriesController < ApplicationController
   
   # GET /categories/1 or /categories/1.json
   def show
-    @category = Category.find(params[:id])
+    @category = current_user.categories.find(params[:id])
   end
   
   # GET /categories/1/edit
   def edit
-    @category = Category.find(params[:id])
+    @category = current_user.categories.find(params[:id])
   end
 
   # PATCH/PUT /categories/1 or /categories/1.json
@@ -77,7 +77,7 @@ class CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.find(params[:id])
+      @category = current_user.categories.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
