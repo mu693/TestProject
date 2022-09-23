@@ -1,0 +1,11 @@
+PDF generation date 
+<%= Date.today %>
+
+<h3>Disease Details</h3>
+<p>Disease ID:  <%= @disease.id %></p>
+<p>Disease name:  <%= @disease.name %></p>
+<p>Disease Code:  <%= @disease.code %></p>
+<p>Disease Status:  <%= @disease.status %></p>
+<p>Medicines:  <% @disease.medicines&.each do |m| %>
+  <%= m.name %><%=  (m == @disease.medicines&.last) ? "" : "," %>
+<% end%></p>
