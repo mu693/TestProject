@@ -1,0 +1,39 @@
+PDF generation date 
+<%= Time.zone.now %>
+
+<div class="container">
+  <h3>Diseases Data</h3>
+  <div id="disease-table">
+    <div class="container fluid">
+      <div class="row">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Sr. #</th>
+              <th>Disease Name</th>
+              <th>Disease Code</th>
+              <th>Disease Status</th>
+              <th>Medicine</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%- @diseases.each_with_index do |disease, index| %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= disease.name %></td>
+                <td><%= disease.code %></td>
+                <td><%= disease.status %></td>
+                <td>
+                  <% disease.medicines&.each do |m| %>
+                    <%= m.name %><%=  (m == disease.medicines&.last) ? "" : "," %>
+                  <% end%>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> 
+
