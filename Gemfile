@@ -86,3 +86,5 @@ gem "letter_opener", group: :development
 gem "select2-rails"
 gem 'pagy'
 gem 'ransack'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
