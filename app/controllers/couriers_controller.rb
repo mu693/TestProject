@@ -58,7 +58,7 @@ class CouriersController < ApplicationController
         format.json { render json: @courier.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end 
 
   # Show Courier
   def show
