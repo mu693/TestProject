@@ -13,6 +13,7 @@
           <h6>First Name:   <%= current_user.name %></h6>
           <h6>Last Name:   <%= current_user.lname %></h6>
           <h6>Email:   <%= current_user.email %></h6>
+          <%= link_to "Edit", edit_user_registration_path, class: "btn btn-dark" %>
         </div>             
       </div>
     </div>
