@@ -25,17 +25,16 @@
                 <%= f.label :status, { class: "form-label" } %>
                 <%= f.select :status, options_for_select(Disease.statuses.keys), { class: "status-disease" } %>
               </div>
-
               
-                <div class="mb-3">
-                  <%= f.association :medicines,
-                    label_method: lambda { |medicines| "#{medicines.name} - #{medicines.description}"},
-                    :label => "Select Medicines:",
-                    as: :select, 
-                    input_html: { class: "value-selector" },
-                    item_wrapper_class: 'value-item select-2'
-                  %>
-                </div>
+              <div class="mb-3">
+                <%= f.association :medicines,
+                  label_method: lambda { |medicines| "#{medicines.name} - #{medicines.description}"},
+                  :label => "Select Medicines:",
+                  as: :select, 
+                  input_html: { class: "value-selector" },
+                  item_wrapper_class: 'value-item select-2'
+                %>
+              </div>
               
                 <div class="form-actions">
                   <%= f.button :submit, class:"btn btn-primary" %>

@@ -7,15 +7,24 @@ class DiseasesController < ApplicationController
   def index
     #binding.pry
     @pagy, @diseases = pagy(current_user.diseases)
-
+    
+    #Searching
     if params[:search].present?
       @search_disease = current_user.diseases.where("name ILIKE ?", "%#{params[:search]}%")
-
-      respond_to do |format|
-        format.js
-      end
+      # respond_to do |format|
+      #   format.js
+      # end  
     else
     end  
+
+     #Downloading record
+     respond_to do |format|
+      format.html
+      format.js
+      format.pdf do
+        render pdf: "Diseases", template: "diseases/record", formats: [:html]
+      end
+    end
   end  
 
   # GET /diseases/new
@@ -69,7 +78,7 @@ class DiseasesController < ApplicationController
           @medicine = MedicineDisease.create(disease_id: @disease.id , medicine_id: m)
           @medicine.save
 
-        format.html { redirect_to diseases_url(@disease), notice: "Disease was successfully updated." }
+        format.html { redirect_to diseases_url, notice: "Disease was successfully updated." }
         format.json { render :index, status: :ok, location: @disease }
         end
       else
@@ -82,6 +91,12 @@ class DiseasesController < ApplicationController
   # Show each record
   def show
     @disease = current_user.diseases.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file_name", template: "diseases/disease", formats: [:html]
+      end
+    end
   end
 
   # Disease Destroy
