@@ -11,7 +11,7 @@
           <th>Price</th>
           <th>Manufacturing Date</th>
           <th>Medicine Expiry Date</th>
-          <th colspan="2">Actions</th>
+          <th colspan="3">Actions</th>
         </tr>
       </thead>
     <tbody>
@@ -24,6 +24,7 @@
         <td><%= @medicine.expiry_date %></td>
         <td><%= link_to "Edit", edit_medicine_url, class: "btn btn-warning float-right"%></td>
         <td><%= button_to 'Delete', medicine_path, class: "btn btn-danger float-right", method: 'delete' %></td>
+        <td><%= link_to 'Download', medicine_path(format: :pdf), class: "btn btn-secondary float-right" %></td>
       </tr>
     </tbody>
     </table>
