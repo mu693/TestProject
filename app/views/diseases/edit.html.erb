@@ -36,6 +36,17 @@
                   item_wrapper_class: 'value-item select-2'
                 %>
               </div>
+
+              <div class="mb-3">
+                <legend>Doctors:</legend>
+                <%= f.association :doctors, 
+                  label_method: lambda { |doctors| "#{doctors.name} - #{doctors.description}"},
+                  :label => "Select Medicines:",
+                  as: :select, 
+                  input_html: { class: "value-selector" },
+                  item_wrapper_class: 'value-item select-2'
+                %>
+              <div>
               
               <div class="mb-3">
                 <%= f.submit "Save", class: "btn btn-primary" %>

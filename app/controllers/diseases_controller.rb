@@ -3,17 +3,14 @@ class DiseasesController < ApplicationController
   before_action :ensure_current_user
   respond_to :html, :json, :js
   before_action :set_disease, only: %i[ :show :edit :update :destroy ]
-
+ 
   def index
     #binding.pry
-    @pagy, @diseases = pagy(current_user.diseases)
+    @pagy, @diseases = pagy(Disease.all)
     
     #Searching
     if params[:search].present?
-      @search_disease = current_user.diseases.where("name ILIKE ?", "%#{params[:search]}%")
-      # respond_to do |format|
-      #   format.js
-      # end  
+      @search_disease = Disease.where("name ILIKE ?", "%#{params[:search]}%") 
     else
     end  
 
@@ -27,48 +24,71 @@ class DiseasesController < ApplicationController
     end
   end  
 
-  # GET /diseases/new
+  
   def new
     @disease = Disease.new
+
+    # Admin authorization
+    authorize @disease
   end
 
-  # Create Disease
   def create
-    @disease = current_user.diseases.new(disease_params)
-
+    @disease = Disease.new(disease_params)
+    
     # Saving medicine in disease
     disease_medicines = params[:disease][:medicine_ids].shift
     disease_medicines  = params[:disease][:medicine_ids]
 
+    #Saving doctors in disease
+    disease_doctors = params[:disease][:doctor_ids].shift
+    disease_doctors  = params[:disease][:doctor_ids]
+    
     respond_to do |format|
       if @disease.save 
-          disease_medicines&.each do |m|
+        #medicines
+        disease_medicines&.each do |m|
           @medicine = MedicineDisease.create(disease_id: @disease.id , medicine_id: m)
-          @medicine.save
-          format.html { redirect_to diseases_url(@disease), notice: "Disease was successfully created." }
-          format.json { render :index, status: :created, location: @disease }
+          if @medicine.save
+            #doctors
+            disease_doctors&.each do |d|
+              @doctor = DiseaseDoctor.create(disease_id: @disease.id , doctor_id: d)
+              @doctor.save
+ 
+              format.html { redirect_to diseases_url, notice: "Disease was successfully created." }
+              format.json { render :index, status: :created, location: @disease }
+            end
+          end
         end
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @disease.errors, status: :unprocessable_entity }
       end
-    end
+    end  
   end
  
-  # Edit Disease
+  
   def edit
-    @disease = current_user.diseases.find(params[:id])
+    @disease = Disease.find(params[:id])
+
+    # Admin authorization
+    authorize @disease
   end
 
   # Update Disease
   def update
     @disease = Disease.find(params[:id])
 
+    # Admin authorization
+    authorize @disease
+    
     # Updating selected Medicines
     disease_medicines = @disease.medicine_diseases
 
-    # destroying medicine
+    # Updating selected Doctors
+    disease_doctors = @disease.disease_doctors
+
+    # Destroying medicine
     disease_medicines.destroy_all
+
+    # Destroying doctors
+    disease_doctors.destroy_all
      
     respond_to do |format|
       if @disease.update(disease_params)
@@ -77,20 +97,22 @@ class DiseasesController < ApplicationController
         params[:disease][:medicine_ids]&.each do |m|
           @medicine = MedicineDisease.create(disease_id: @disease.id , medicine_id: m)
           @medicine.save
+        end 
+        params[:disease][:doctor_ids]&.each do |d|
+          @doctor = DiseaseDoctor.create(disease_id: @disease.id, doctor_id: d)
+          @doctor.save         
 
-        format.html { redirect_to diseases_url, notice: "Disease was successfully updated." }
-        format.json { render :index, status: :ok, location: @disease }
+          format.html { redirect_to diseases_url, notice: "Disease was successfully updated." }
+          format.json { render :index, status: :ok, location: @disease }
         end
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @disease.errors, status: :unprocessable_entity }
       end
-    end
+    end        
   end
    
-  # Show each record
-  def show
-    @disease = current_user.diseases.find(params[:id])
+ 
+  def show 
+    @disease = Disease.find(params[:id])
+
     respond_to do |format|
       format.html
       format.pdf do
@@ -99,9 +121,12 @@ class DiseasesController < ApplicationController
     end
   end
 
-  # Disease Destroy
+  
   def destroy
     @disease = Disease.find(params[:id])
+    # Admin authorization
+    authorize @disease
+
     @disease.destroy
     respond_to do |format|
       format.html { redirect_to diseases_url, notice: "Selected Disease was successfully destroyed." }
@@ -110,14 +135,14 @@ class DiseasesController < ApplicationController
   end
  
   private
-  # Use callbacks to share common setup or constraints between actions.
+  
   def set_disease
-      @disease = current_user.diseases.find(params[:id])
+      @disease = Disease.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    
     def disease_params
-      params.require(:disease).permit(:name, :code, :status, :medicines_ids, :destroy)
+      params.require(:disease).permit(:name, :code, :status, :medicines_ids, :doctor_ids)
     end
 
     def current_disease

@@ -6,34 +6,31 @@ class CouriersController < ApplicationController
   # All couriers data
   def index
  
-  @pagy, @couriers = pagy(current_user.couriers)
+  @pagy, @couriers = pagy(Courier.all)
 
     if params[:search].present?
-      @search_courier = current_user.couriers.where("name ILIKE ?", "%#{params[:search]}%")
+      @search_courier = Courier.where("name ILIKE ?", "%#{params[:search]}%")
 
       respond_to do |format|
         format.js
       end
     else
     end  
-
   end
-
 
   # GET /couriers/new
   def new
     @courier = Courier.new
   end
 
-
   # Create Courier
   def create
     #@courier = Courier.new(courier_params)
-    @courier = current_user.couriers.new(courier_params)
+    @courier = Courier.new(courier_params)
 
     respond_to do |format|
       if @courier.save
-        format.html { redirect_to couriers_url(@courier), notice: "Courier was successfully created." }
+        format.html { redirect_to couriers_url, notice: "Courier was successfully created." }
         format.json { render :index, status: :created, location: @courier }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,14 +41,14 @@ class CouriersController < ApplicationController
 
   # Edit Courier
   def edit
-    @courier = current_user.couriers.find(params[:id])
+    @courier = Courier.find(params[:id])
   end
 
   # Update Courier
   def update
     respond_to do |format|
       if @courier.update(courier_params)
-        format.html { redirect_to couriers_url(@courier), notice: "Courier was successfully updated." }
+        format.html { redirect_to couriers_url, notice: "Courier was successfully updated." }
         format.json { render :index, status: :ok, location: @courier }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -62,7 +59,7 @@ class CouriersController < ApplicationController
 
   # Show Courier
   def show
-    @courier = current_user.couriers.find(params[:id])
+    @courier = Courier.find(params[:id])
   end
 
   # DELETE Courier
@@ -79,7 +76,7 @@ class CouriersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_courier
-      @courier = current_user.couriers.find(params[:id])
+      @courier = Courier.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

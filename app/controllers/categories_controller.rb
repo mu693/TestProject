@@ -3,13 +3,11 @@ class CategoriesController < ApplicationController
   before_action :ensure_current_user
   before_action :set_category, only: %i[ show edit update destroy ]
 
-  # GET /categories or /categories.json
   def index
- 
-  @pagy, @categories = pagy(current_user.categories)
+  @pagy, @categories = pagy(Category.all)
 
     if params[:search].present?
-      @search_category = current_user.categories.where("name ILIKE ?", "%#{params[:search]}%")
+      @search_category = Category.where("name ILIKE ?", "%#{params[:search]}%")
 
       respond_to do |format|
         format.js
@@ -19,20 +17,19 @@ class CategoriesController < ApplicationController
  
   end
   
-  # GET /categories/new
   def new
     @category = Category.new
+
+    # Admin authorization
+    authorize @category
   end
    
-  
-  # POST /categories or /categories.json
   def create
-    @category = current_user.categories.new(category_params)
+    @category = Category.new(category_params)
    
-    #debugger
     respond_to do |format|
       if @category.save
-        format.html { redirect_to categories_path(@category), notice: "Category was successfully created." }
+        format.html { redirect_to categories_path, notice: "Category was successfully created." }
         format.json { render :index, status: :created, location: @category }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,21 +38,21 @@ class CategoriesController < ApplicationController
     end
   end
   
-  # GET /categories/1 or /categories/1.json
   def show
-    @category = current_user.categories.find(params[:id])
+    @category = Category.find(params[:id])
   end
   
-  # GET /categories/1/edit
   def edit
-    @category = current_user.categories.find(params[:id])
+    @category = Category.find(params[:id])
+
+    # Admin authorization
+    authorize @category
   end
 
-  # PATCH/PUT /categories/1 or /categories/1.json
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to categories_path(@category), notice: "Category was successfully updated." }
+        format.html { redirect_to categories_path, notice: "Category was successfully updated." }
         format.json { render :index, status: :ok, location: @category }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -64,10 +61,13 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # DELETE /categories/1 or /categories/1.json
   def destroy
-    @category.destroy
+    @category = Category.find(params[:id])
 
+    # Admin authorization
+    authorize @category
+
+    @category.destroy
     respond_to do |format|
       format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
@@ -75,12 +75,11 @@ class CategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    
     def set_category
-      @category = current_user.categories.find(params[:id])
+      @category = Category.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def category_params
       params.require(:category).permit( :disease_id, :medicine_id, :name)
     end

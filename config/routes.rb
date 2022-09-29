@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   resources :users
   resources :couriers
   resources :categories
-  
+  resources :patient_appointments
 end

@@ -14,6 +14,7 @@ PDF generation date
               <th>Disease Code</th>
               <th>Disease Status</th>
               <th>Medicine</th>
+              <th>Doctor</th>
             </tr>
           </thead>
           <tbody>
@@ -26,6 +27,11 @@ PDF generation date
                 <td>
                   <% disease.medicines&.each do |m| %>
                     <%= m.name %><%=  (m == disease.medicines&.last) ? "" : "," %>
+                  <% end%>
+                </td>
+                <td>
+                  <% disease.doctors&.each do |d| %>
+                    <%= d.name %><%=  (d == disease.doctors&.last) ? "" : "," %>
                   <% end%>
                 </td>
               </tr>

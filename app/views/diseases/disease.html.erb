@@ -9,3 +9,6 @@ PDF generation date
 <p>Medicines:  <% @disease.medicines&.each do |m| %>
   <%= m.name %><%=  (m == @disease.medicines&.last) ? "" : "," %>
 <% end%></p>
+<p>Doctor:  <% @disease.doctors&.each do |d| %>
+  <%= d.name %><%=  (d == @disease.doctors&.last) ? "" : "," %>
+<% end%></p>

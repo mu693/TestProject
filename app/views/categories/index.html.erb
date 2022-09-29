@@ -18,7 +18,9 @@
                 <th>Category Type</th>
                 <th>Disease</th>
                 <th>Medicine</th>
-                <th colspan="2">Actions</th>
+                <% if current_user.admin? %>
+                  <th colspan="3">Actions</th>
+                <% end %>
               </tr>
             </thead>
             <tbody>
@@ -28,9 +30,11 @@
                   <td><%= category.name %></td>
                   <td><%= category.disease.name %></td> 
                   <td><%= category.medicine.name %></td>   
-                  <td><%= link_to "Edit", edit_category_path(category), class: "btn btn-warning float-right" %><br /></td>
-                  <td><%= link_to "Show", category_path(category), class: "btn btn-success float-right"%></td>
-                  <td><%= button_to "Delete", category, method: :delete, class: "btn btn-danger float-right" %></td>
+                  <% if current_user.admin? %>
+                    <td><%= link_to "Edit", edit_category_path(category), class: "btn btn-warning float-right" %><br /></td>
+                    <td><%= link_to "Show", category_path(category), class: "btn btn-success float-right"%></td>
+                    <td><%= button_to "Delete", category, method: :delete, class: "btn btn-danger float-right" %></td>
+                  <% end %>
                 </tr>
               <% end %>
             </tbody> 
@@ -38,8 +42,11 @@
         </div>
              <!--Pagination-->
         <%== pagy_bootstrap_nav(@pagy) %>
-   
-        <%= link_to "New category", new_category_path, class: "btn btn-primary" %>
+       
+        <% if current_user.admin? %>
+          <%= link_to "New category", new_category_path, class: "btn btn-primary" %>
+        <% end %>
+
         <%= link_to 'Back', url_for(:back), class: "btn btn-primary" %>
       </div>
     </div>

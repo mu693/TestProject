@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_28_124034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
     t.index ["user_id"], name: "index_couriers_on_user_id"
   end
 
+  create_table "disease_doctors", force: :cascade do |t|
+    t.bigint "disease_id", null: false
+    t.bigint "doctor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disease_id"], name: "index_disease_doctors_on_disease_id"
+    t.index ["doctor_id"], name: "index_disease_doctors_on_doctor_id"
+  end
+
   create_table "diseases", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -73,6 +82,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_diseases_on_user_id"
+  end
+
+  create_table "doctors", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "medicine_diseases", force: :cascade do |t|
@@ -95,6 +111,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_medicines_on_user_id"
+  end
+
+  create_table "patient_appointments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "doctor_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.index ["doctor_id"], name: "index_patient_appointments_on_doctor_id"
+    t.index ["user_id"], name: "index_patient_appointments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -121,6 +148,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
     t.string "lname"
     t.string "image"
     t.string "avatar"
+    t.integer "role", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -131,8 +159,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_15_121605) do
   add_foreign_key "categories", "medicines"
   add_foreign_key "categories", "users"
   add_foreign_key "couriers", "users"
+  add_foreign_key "disease_doctors", "diseases"
+  add_foreign_key "disease_doctors", "doctors"
   add_foreign_key "diseases", "users"
   add_foreign_key "medicine_diseases", "diseases"
   add_foreign_key "medicine_diseases", "medicines"
   add_foreign_key "medicines", "users"
+  add_foreign_key "patient_appointments", "doctors"
+  add_foreign_key "patient_appointments", "users"
 end
