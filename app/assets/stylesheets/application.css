@@ -10,10 +10,79 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
-
  *= require_self
  *= require select2
  *= require select2-bootstrap
  */
 
- 
+ @import "simple_calendar";
+
+.simple-calendar {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ccc;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+}
+
+.day {
+  width: 25px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+  
+.wday-0 {
+  color: rgb(252, 1, 1);
+}
+.wday-1 {
+  color: #000;
+}
+.wday-2 {
+  color: #000;
+}
+.wday-3 {
+  color: #000;
+}
+.wday-4 {
+  color: #000;
+}
+.wday-5 {
+  color: #000;
+}
+.wday-6 {
+  color: #000;
+}
+
+.today {
+  background-color: #e62727;
+}
+.past {
+  color: #ccc;
+}
+.future {
+  color: #000;
+}
+
+.start-date {
+  color: #f0f0f0;
+}
+
+.prev-month {
+  color: #ccc;
+}
+.next-month { 
+  color: #ccc;
+}
+.current-month {
+  color: #000;
+}
+
+.has-events {
+  color: rgb(255, 1, 1);
+}

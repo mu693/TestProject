@@ -17,6 +17,7 @@
               <h6>First Name:   <%= user.name %></h6>
               <h6>Last Name:   <%= user.lname %></h6>
               <h6>Email:   <%= user.email %></h6>
+              <%= button_to 'Delete', user_path(user), class: "btn btn-danger", method: 'delete' %>
             </div>
           </div>
         </div>

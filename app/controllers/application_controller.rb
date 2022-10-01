@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  
+  include Pagy::Backend
 
   private
 
@@ -11,10 +13,6 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "You are not authorized to perform this action."
     redirect_back(fallback_location: root_path)
   end
-  
-
-  include Pagy::Backend
-  
 
   def after_sign_out_path_for(resource)
     new_user_session_path

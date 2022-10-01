@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Appointment dates</h1>
+
+<div id="appointment_dates">
+  <% @appointment_dates.each do |appointment_date| %>
+    <%= render appointment_date %>
+    <p>
+      <%= link_to "Show this appointment date", appointment_date %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New appointment date", new_appointment_date_path %>

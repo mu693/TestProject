@@ -89,5 +89,4 @@ gem 'ransack'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'pundit'
-gem 'fullcalendar-rails'
-gem 'momentjs-rails'
+gem "simple_calendar", "~> 2.4"

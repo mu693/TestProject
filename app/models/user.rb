@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :couriers
   has_many :categories
   has_many :patient_appointments
+  has_many :doctors, through: :patient_appointments
 
   has_one_attached :avatar 
 

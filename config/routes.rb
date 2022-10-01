@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :appointment_dates
   
   ## Devise
   devise_for :users
@@ -21,4 +22,5 @@ Rails.application.routes.draw do
   resources :couriers
   resources :categories
   resources :patient_appointments
+  resources :appointment_dates
 end

@@ -2,7 +2,8 @@
 //= require jquery_ujs
 //= require_tree .
 //= require select2-full
-//= require disease.js
+//= require cocoon
+
 
 $(document).ready(function() {
     $('.value-selector').select2();

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_28_124034) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_01_134658) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_124034) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "appointment_dates", force: :cascade do |t|
+    t.bigint "doctor_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_appointment_dates_on_doctor_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -118,8 +127,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_124034) do
     t.datetime "updated_at", null: false
     t.bigint "doctor_id", null: false
     t.bigint "user_id", null: false
-    t.datetime "start_date"
-    t.datetime "end_date"
+    t.datetime "date"
     t.index ["doctor_id"], name: "index_patient_appointments_on_doctor_id"
     t.index ["user_id"], name: "index_patient_appointments_on_user_id"
   end
@@ -155,6 +163,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_124034) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "appointment_dates", "doctors"
   add_foreign_key "categories", "diseases"
   add_foreign_key "categories", "medicines"
   add_foreign_key "categories", "users"
