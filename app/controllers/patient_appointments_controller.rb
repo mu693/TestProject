@@ -4,20 +4,20 @@ class PatientAppointmentsController < ApplicationController
   before_action :set_appointment, only: %i[ show edit update destroy ]
 
   def index
-    @appointment_dates = AppointmentDate.where(
-      start_time: Time.now.beginning_of_month.beginning_of_week..Time.now.end_of_month.end_of_week
-    )
+    # @appointment_dates = AppointmentDate.where(
+    #   start_time: Time.now.beginning_of_month.beginning_of_week..Time.now.end_of_month.end_of_week
+    # )
+    
+    @appointment_dates = AppointmentDate.where( doctor_id: params[:doctor])
+      render_format
 
     @patient_appointments = PatientAppointment.all
     @patient_appointment = PatientAppointment.new
-
-    # respond_to do |format|
-    #   format.js
-    # end
       
   end
 
   def create
+    debugger
     @patient_appointment = PatientAppointment.new(patient_appointment_params)
 
     respond_to do |format|
@@ -68,10 +68,22 @@ class PatientAppointmentsController < ApplicationController
     end
 
     def patient_appointment_params
-      params.require(:patient_appointment).permit(:doctor_id)
+      params.require(:patient_appointment).permit(:doctor_id, :date, :appointment_date_id)
     end
 
     def current_appointment
       @patient_appointment = PatientAppointment.find(params[:id])
-    end   
+    end  
+    
+    def render_format
+      if params[:doctor]
+        respond_to do |format|
+            format.js
+        end
+      else
+        respond_to do |format|
+          format.html
+        end
+      end
+    end
 end

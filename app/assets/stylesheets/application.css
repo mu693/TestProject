@@ -85,4 +85,10 @@
 
 .has-events {
   color: rgb(255, 1, 1);
+  font-weight: bold;
+}
+
+.has-events :hover {
+  color: rgb(1, 26, 255);
+  font-weight: bold;
 }

@@ -1,0 +1,64 @@
+<div class="container mt-5 text-center">
+  <div class="col-5">
+    <h2>Appointment</h2>
+    <%= simple_form_for(@patient_appointment, remote: true) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <div id="container">   
+        <div class="mb-3">
+          <legend id="tester">Doctors:</legend>
+          <%= f.association :doctor, 
+            label_method: lambda { |doctor| "#{doctor.name} - #{doctor.description} "},
+            :label => "Select Doctor:",
+            as: :select, 
+            input_html: { class: "value-selector date-select" }, 
+            item_wrapper_class: 'value-item'
+          %>
+        </div>
+          <%= month_calendar(events: @appointment_dates) do |date, appointment_dates| %>
+            <%= content_tag :div, class: "calendar-day", data: {date: date} do %>
+              <%= date.day %>
+              <% appointment_dates.each do |appointment_date| %>
+                <div class="single_event">
+                  <%#= link_to appointment_date.doctor.name, appointment_date %>
+                </div>
+              <% end %>
+            <% end %>       
+          <% end %>  
+        </div>
+        <div class="form-actions mb-3">
+          <%= f.button :submit, class:"btn btn-primary" %>
+        <% end %>
+      </div>
+  </div>
+</div>
+
+<script>
+
+$( function() {
+  $('.date-select').on('select2:select', function (e){
+    doctor = e.target.value
+    send_ajax(doctor)
+  });
+  function send_ajax(doctor){
+    response = $.ajax({
+        url: '/patient_appointments',
+        method: 'Get',
+        data: {doctor},
+    });
+  }
+});
+
+$(".calendar-day").on("click", function() {
+  date = $(this).data("date")
+  //location.href = "/appointment_dates/new?appointment_date[start_time]=#{date}"
+});
+
+$(function() {  
+$('.current-month').click(function(){
+    $(this).css('background', 'orange');
+
+  });
+});
+
+</script>

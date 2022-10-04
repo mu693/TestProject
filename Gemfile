@@ -90,3 +90,4 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'pundit'
 gem "simple_calendar", "~> 2.4"
+gem "byebug"

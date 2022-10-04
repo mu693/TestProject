@@ -25,7 +25,7 @@ class AppointmentDatesController < ApplicationController
 
     respond_to do |format|
       if @appointment_date.save
-        format.html { redirect_to appointment_date_url(@appointment_date), notice: "Appointment date was successfully created." }
+        format.html { redirect_to appointment_date_url(@appointment_date), notice: "Doctor availability date was successfully created." }
         format.json { render :show, status: :created, location: @appointment_date }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class AppointmentDatesController < ApplicationController
   def update
     respond_to do |format|
       if @appointment_date.update(appointment_date_params)
-        format.html { redirect_to appointment_date_url(@appointment_date), notice: "Appointment date was successfully updated." }
+        format.html { redirect_to appointment_date_url(@appointment_date), notice: "Doctor availability date was successfully updated." }
         format.json { render :show, status: :ok, location: @appointment_date }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class AppointmentDatesController < ApplicationController
     @appointment_date.destroy
 
     respond_to do |format|
-      format.html { redirect_to appointment_dates_url, notice: "Appointment date was successfully destroyed." }
+      format.html { redirect_to appointment_dates_url, notice: "Doctor availability date was successfully destroyed." }
       format.json { head :no_content }
     end
   end
