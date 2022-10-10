@@ -5,7 +5,3 @@
 //= require cocoon
 
 
-$(document).ready(function() {
-    $('.value-selector').select2();
-    $('#disease_status').select2();
-});

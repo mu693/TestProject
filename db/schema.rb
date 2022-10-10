@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_03_125053) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_06_123853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -128,7 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_125053) do
     t.bigint "doctor_id", null: false
     t.bigint "user_id", null: false
     t.datetime "date"
-    t.bigint "appointment_date_id", null: false
+    t.bigint "appointment_date_id"
     t.index ["appointment_date_id"], name: "index_patient_appointments_on_appointment_date_id"
     t.index ["doctor_id"], name: "index_patient_appointments_on_doctor_id"
     t.index ["user_id"], name: "index_patient_appointments_on_user_id"

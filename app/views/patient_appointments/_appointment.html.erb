@@ -6,12 +6,12 @@
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
       <div id="container">   
         <div class="mb-3">
-          <legend id="tester">Doctors:</legend>
+          
           <%= f.association :doctor, 
-            label_method: lambda { |doctor| "#{doctor.name} - #{doctor.description} "},
+            label_method: lambda { |doctor| "#{doctor.name}"},
             :label => "Select Doctor:",
             as: :select, 
-            input_html: { class: "value-selector date-select" }, 
+            input_html: { class: "value-selector date-select select-doctor" }, 
             item_wrapper_class: 'value-item'
           %>
         </div>
@@ -26,39 +26,65 @@
             <% end %>       
           <% end %>  
         </div>
-        <div class="form-actions mb-3">
-          <%= f.button :submit, class:"btn btn-primary" %>
+        <div class="form-actions mt-3">
+          <%= f.button :submit, onclick:"send_ajax()", class:"btn btn-primary" %>
         <% end %>
       </div>
   </div>
 </div>
 
 <script>
+ var doctor;
+ var date;
 
-$( function() {
-  $('.date-select').on('select2:select', function (e){
-    doctor = e.target.value
-    send_ajax(doctor)
+  $( function() {
+    $('.date-select').on('select2:select', function (e){
+      doctor = e.target.value
+      get_ajax(doctor)
+    })
   });
-  function send_ajax(doctor){
+  
+  $('.calendar-day').on("click", function(e) {
+      // date = this.innerText
+      date =  e.target.getAttribute('data-date');
+  });
+
+  function send_ajax(){
     response = $.ajax({
         url: '/patient_appointments',
-        method: 'Get',
-        data: {doctor},
+        method: 'Post',
+        data: {date, doctor}
     });
   }
-});
+  
+  function get_ajax(doctor){
+    response = $.ajax({
+        url: '/patient_appointments/new',
+        method: 'Get',
+        data: {doctor}
+    });
+  }
 
-$(".calendar-day").on("click", function() {
-  date = $(this).data("date")
-  //location.href = "/appointment_dates/new?appointment_date[start_time]=#{date}"
-});
+  // $(document).on("click", function() {
+  //   $('.value-selector').select2({
+  //   placeholder: $(this).attr('placeholder')
+  //   //placeholder: "Select a doctor"
+  //   });
+  // });
 
-$(function() {  
-$('.current-month').click(function(){
-    $(this).css('background', 'orange');
+//   $('.value-item').select2({
+//   placeholder: 'Choose One'
+// }).val('').trigger('change');
 
+  $(document).ready(function() {
+    $('.value-selector').select2({
+      placeholder: ""
+    });
   });
-});
+
+  $('.has-events').click(function(){
+    $('.table-test').find('.active').removeClass('active');
+    $(this).addClass('active');
+  });
 
 </script>

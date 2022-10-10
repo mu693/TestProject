@@ -1,3 +1,28 @@
-<div id='appointments'>
-  <%= render 'appointment' %>
+<div class="container-fluid text-center">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <h2>Appointment Details</h2>
+      <div class="card">
+        <div class="card-body">
+          <% @patient_appointments.each do |patient_appointments| %>
+            <div class="mb-3">
+              <Strong> Doctor: </strong>
+              <%= patient_appointments.doctor.name %><br>
+              <strong> Appointment_Date: </strong>
+              <%= patient_appointments.date.strftime("%d/%m/%Y") %><br />
+              <div class="btn-group">
+                <%#= button_to 'Edit', edit_patient_appointment_path(patient_appointments), class: "btn btn-warning edit" %>
+                <%= button_to 'Cancel', patient_appointment_path(patient_appointments), class: "btn btn-danger", method: 'delete' %>
+              </div>
+            </div>
+            <% end %>
+        </div>
+      </div>
+      <% if current_user.patient? %>
+        <div class="mt-3">
+          <%= link_to "New Appointment", new_patient_appointment_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -13,10 +13,17 @@ class AppointmentDatesController < ApplicationController
   # GET /appointment_dates/new
   def new
     @appointment_date = AppointmentDate.new
+
+     # Admin authorization
+     authorize @appointment_date
   end
 
   # GET /appointment_dates/1/edit
   def edit
+    @appointment_date = AppointmentDate.find(params[:id])
+
+     # Admin authorization
+     authorize @appointment_date
   end
 
   # POST /appointment_dates or /appointment_dates.json
@@ -36,6 +43,8 @@ class AppointmentDatesController < ApplicationController
 
   # PATCH/PUT /appointment_dates/1 or /appointment_dates/1.json
   def update
+    @appointment_date = AppointmentDate.find(params[:id])
+    
     respond_to do |format|
       if @appointment_date.update(appointment_date_params)
         format.html { redirect_to appointment_date_url(@appointment_date), notice: "Doctor availability date was successfully updated." }
@@ -49,6 +58,10 @@ class AppointmentDatesController < ApplicationController
 
   # DELETE /appointment_dates/1 or /appointment_dates/1.json
   def destroy
+    @appointment_date = AppointmentDate.find(params[:id])
+     # Admin authorization
+     authorize @appointment_date
+
     @appointment_date.destroy
 
     respond_to do |format|

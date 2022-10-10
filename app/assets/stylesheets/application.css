@@ -15,6 +15,18 @@
  *= require select2-bootstrap
  */
 
+ .btn-group .edit {
+  margin-right: 7px;
+ }
+
+ .btn-group .editdate {
+  margin-right: 7px;
+ }
+
+.select-doctor {
+  width: 250px;
+}
+
  @import "simple_calendar";
 
 .simple-calendar {
@@ -25,7 +37,7 @@
   font-size: 12px;
   font-family: Arial, sans-serif;
   color: #333;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   border-radius: 1rem;
 }
 
@@ -91,4 +103,8 @@
 .has-events :hover {
   color: rgb(1, 26, 255);
   font-weight: bold;
+}
+ 
+.active {
+  background-color: aqua !important;
 }

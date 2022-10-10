@@ -1,12 +1,38 @@
-<h1>Appointment dates</h1>
-
-<div id="appointment_dates">
-  <% @appointment_dates.each do |appointment_date| %>
-    <%= render appointment_date %>
-    <p>
-      <%= link_to "Show this appointment date", appointment_date %>
-    </p>
-  <% end %>
+<div class="container">
+  <h2>Doctors Avalibility Dates</h2>
+  <div class="container fluid">
+    <div class="row">
+      <table class="table table-striped table-bordered">
+        <thead> 
+          <tr>
+            <th>Sr. #</th>
+            <th>Doctor Name</th>
+            <th>Date</th>
+            <th>Availability</th>
+            <th colspan="3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%- @appointment_dates.each_with_index do |appointment_date, index| %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= appointment_date.doctor.name %></td>
+                <td><%= appointment_date.start_time.strftime("%d/%m/%Y") %></td>
+                <td>
+                  <%= appointment_date.start_time.strftime("%I:%M %p") %>
+                  <strong> To </strong>
+                  <%= appointment_date.end_time.strftime("%I:%M %p") %>
+                </td>
+                 <td><%= link_to "Edit", edit_appointment_date_url(appointment_date), class: "btn btn-warning float-right"%></td>
+                <td><%= link_to "Show", appointment_date_url(appointment_date), class: "btn btn-success float-right"%></td>
+                <td><%= button_to 'Delete', appointment_date_path(appointment_date), class: "btn btn-danger float-right", method: 'delete' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <%= link_to "New appointment date", new_appointment_date_path, class: "btn btn-primary" %>
+      <%= link_to 'Back', url_for(:back), class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New appointment date", new_appointment_date_path %>
