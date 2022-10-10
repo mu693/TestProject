@@ -28,7 +28,7 @@
               
               <div class="mb-3">
                 <%= f.association :medicines,
-                  label_method: lambda { |medicines| "#{medicines.name} - #{medicines.description}"},
+                  label_method: lambda { |medicines| "#{medicines.name}"},
                   :label => "Select Medicines:",
                   as: :select, 
                   input_html: { class: "value-selector" },
@@ -39,7 +39,7 @@
               <div class="mb-3">
                 <legend>Doctors:</legend>
                 <%= f.association :doctors, 
-                  label_method: lambda { |doctors| "#{doctors.name} - #{doctors.description}"},
+                  label_method: lambda { |doctors| "#{doctors.name}"},
                   :label => "Select Docotrs:",
                   as: :select, 
                   input_html: { class: "value-selector" },
@@ -59,4 +59,11 @@
   </div>
 </div>              
 
+<script>
+  
+  $(document).ready(function() {
+    $('.value-selector').select2();
+    $('#disease_status').select2();
+  });
 
+</script>
