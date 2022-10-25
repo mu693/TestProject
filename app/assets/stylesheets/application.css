@@ -13,6 +13,7 @@
  *= require_self
  *= require select2
  *= require select2-bootstrap
+ *= require jquery.rateyo
  */
 
  .btn-group .edit {
@@ -27,7 +28,7 @@
   width: 250px;
 }
 
- @import "simple_calendar";
+@import "simple_calendar";
 
 .simple-calendar {
   width: 100%;

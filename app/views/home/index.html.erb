@@ -9,12 +9,50 @@
           <% else %>
             <h5>No Image</h5>
           <% end %>
-          <h6>First Name:   <%= current_user.name %></h6>
-          <h6>Last Name:   <%= current_user.lname %></h6>
-          <h6>Email:   <%= current_user.email %></h6>
+          <h6><b>First Name:   <%= current_user.name %></b></h6>
+          <button id="hide" class="btn btn-secondary">Hide</button>
+            <div class="block">
+              <p><b>Last Name:   <%= current_user.lname %></b></p>
+              <p><b>Email:   <%= current_user.email %></b></p>
+            </div>  
+          <br />  
           <%= link_to "Edit", edit_user_registration_path, class: "btn btn-dark" %>
         </div>             
       </div>
     </div>
   </div>
 </div>
+
+<script>
+// $(document).ready(function(){
+//    $("#hide").click(function(){
+//     $("p").hide(1000);
+//   });
+//   $("#show").click(function(){
+//     $("p").show(1000);
+//   });
+// });
+
+$(document).ready(function(){
+  $("#hide").click(function(){
+     $("p").fadeToggle(500);
+  });
+});
+
+//  $(document).ready(function() {
+//         $(".block").slice(0, 1).show();
+//         if ($(".block:hidden").length != 0) {
+//             $("#hide").show();
+//         }
+//         $("#hide").on("click", function(e) {
+//             e.preventDefault();
+//             $(".block:hidden").slice(0, 1).slideDown();
+//             if ($(".block:hidden").length == 0) {
+//                 $("#hide").text("No More to view").fadOut("slow");
+//             }
+//         });
+//     }) 
+
+</script>
+
+   

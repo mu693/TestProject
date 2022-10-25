@@ -33,7 +33,7 @@ class DiseasesController < ApplicationController
   end
 
   def create
-    @disease = Disease.new(disease_params)
+    @disease = current_user.diseases.new(disease_params)
     
     # Saving medicine in disease
     disease_medicines = params[:disease][:medicine_ids].shift
@@ -42,8 +42,7 @@ class DiseasesController < ApplicationController
     #Saving doctors in disease
     disease_doctors = params[:disease][:doctor_ids].shift
     disease_doctors  = params[:disease][:doctor_ids]
-    
-    respond_to do |format|
+
       if @disease.save 
         #medicines
         disease_medicines&.each do |m|
@@ -53,13 +52,11 @@ class DiseasesController < ApplicationController
             disease_doctors&.each do |d|
               @doctor = DiseaseDoctor.create(disease_id: @disease.id , doctor_id: d)
               @doctor.save
- 
-              format.html { redirect_to diseases_url, notice: "Disease was successfully created." }
-              format.json { render :index, status: :created, location: @disease }
+              redirect_to diseases_url
+              flash[:notice] = "Disease was successfully created."
             end
           end
         end
-      end
     end  
   end
  

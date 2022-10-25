@@ -20,13 +20,13 @@ class CouriersController < ApplicationController
 
   # GET /couriers/new
   def new
-    @courier = Courier.new
+    @courier = current_user.couriers.new
   end
 
   # Create Courier
   def create
     #@courier = Courier.new(courier_params)
-    @courier = Courier.new(courier_params)
+    @courier = current_user.couriers.new(courier_params)
 
     respond_to do |format|
       if @courier.save

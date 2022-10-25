@@ -32,6 +32,11 @@
             </div>
            
             <div class="mb-3">
+              <%= f.label :approved, { class: "form-label" } %>
+              <%= f.select :approved, options_for_select(User.approveds.keys), { class: "User Approved" } %>
+            </div>  
+
+            <div class="mb-3">
               <div class="field">
                 <%= f.label :email %><br />
                 <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

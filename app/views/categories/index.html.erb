@@ -25,7 +25,7 @@
             </thead>
             <tbody>
               <%- @categories.each_with_index do |category, index| %>  
-                <tr>
+                <tr class="table_test">
                   <td><%= index + 1 %></td>
                   <td><%= category.name %></td>
                   <td><%= category.disease.name %></td> 
@@ -54,4 +54,11 @@
 </div>  
 
 
-      
+<script>
+$(".table_test").hover(function(){
+  $(this).css("background-color", "pink")
+},
+function(){
+  $(this).css("background-color", "white")
+});
+</script>      

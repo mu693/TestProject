@@ -31,7 +31,7 @@ class MedicinesController < ApplicationController
   end
   
   def create
-    @medicine = Medicine.new(medicine_params)
+    @medicine = current_user.medicines.new(medicine_params)
 
     respond_to do |format|
       if @medicine.save

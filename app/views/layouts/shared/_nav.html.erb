@@ -7,15 +7,17 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item"><%= link_to "Profile", root_path, class: "btn btn-dark" %></li>
-              <% if current_user.admin? %>
+              <% if current_user.admin? || current_user.doctor? %>
                 <li class="nav-item"><%= link_to "Doctor Availability", appointment_dates_path, class: "btn btn-dark" %></li>
               <% end %>  
               <li class="nav-item"><%= link_to "Appointment", patient_appointments_path, class: "btn btn-dark" %></li>
-              <li class="nav-item"><%= link_to "Diseases", diseases_path, class: "btn btn-dark" %></li>
-              <li class="nav-item"><%= link_to "Medicines", medicines_path, class: "btn btn-dark" %></li>
-              <li class="nav-item"><%= link_to "Categories", categories_path, class: "btn btn-dark" %></li>
-              <li class="nav-item"><%= link_to "Couriers", couriers_path, class: "btn btn-dark" %></li>
+              <% if current_user.admin? || current_user.doctor? %>
+                <li class="nav-item"><%= link_to "Diseases", diseases_path, class: "btn btn-dark" %></li>
+                <li class="nav-item"><%= link_to "Medicines", medicines_path, class: "btn btn-dark" %></li>
+                <li class="nav-item"><%= link_to "Categories", categories_path, class: "btn btn-dark" %></li>
+              <% end %>  
               <% if current_user.admin? %>
+                <li class="nav-item"><%= link_to "Couriers", couriers_path, class: "btn btn-dark" %></li>
                 <li class="nav-item"><%= link_to "Users", users_path, class: "btn btn-dark" %></li>
               <% end %>
               <li class="nav-item"><%= button_to "Logout", destroy_user_session_path, { method: :delete, class: "btn btn-danger" } %></li>

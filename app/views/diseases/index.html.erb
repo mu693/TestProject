@@ -30,7 +30,7 @@
 
           <tbody>
             <%- @diseases.each_with_index do |disease, index| %>
-              <tr>
+              <tr class="table_test">
                 <td><%= index + 1 %></td>
                 <td><%= disease.name %></td>
                 <td><%= disease.code %></td>
@@ -58,16 +58,22 @@
       </div>
               <!--Pagination-->
       <%== pagy_bootstrap_nav(@pagy) %>
-
+      
       <% if current_user.admin? %>
         <%= link_to "Add New Disease", new_disease_path, class: "btn btn-primary" %>
       <% end %>
-
+      
+      <br />
       <%= link_to 'Back', url_for(:back), class: "btn btn-primary" %>
     </div>
   </div>
-</div> 
+</div>
 
-
- 
-      
+<script>
+$(".table_test").hover(function(){
+  $(this).css("background-color", "pink")
+},
+function(){
+  $(this).css("background-color", "white")
+});
+</script>

@@ -3,5 +3,4 @@
 //= require_tree .
 //= require select2-full
 //= require cocoon
-
-
+//= require jquery.rateyo
