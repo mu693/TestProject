@@ -92,3 +92,5 @@ gem 'pundit'
 gem "simple_calendar", "~> 2.4"
 gem "byebug"
 gem 'rateyo-rails'
+gem 'sidekiq'
+gem 'redis'

@@ -1,0 +1,33 @@
+<%= simple_form_for (@user) do |f| %>
+ 
+  <div class="container fluid">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-body">
+           <h2>Edit</h2>
+
+                            <!--Avatar Upload Field-->
+
+
+
+           
+            <div class="mb-3">
+              <%= f.label :approved, { class: "form-label" } %>
+              <%= f.select :approved, options_for_select(User.approveds.keys), { class: "User Approved" } %>
+            </div>  
+
+           
+         
+            <div class="actions">
+              <%= f.submit "Update", class: "btn btn-primary" %>
+            </div>
+           
+          
+          </div>
+        </div>
+      </div> 
+    </div> 
+  </div>         
+<% end %>
+

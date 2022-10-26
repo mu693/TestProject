@@ -8,7 +8,7 @@ class PatientAppointmentPolicy < ApplicationPolicy
 
   def index?
     if user.present?
-      user.admin? || user.patient?
+      user.admin? || user.patient? || user.doctor?
     end
   end
 
@@ -26,13 +26,13 @@ class PatientAppointmentPolicy < ApplicationPolicy
 
   def show?
     if user.present?
-      user.admin? || user.patient?
+      user.admin? || user.patient? || user.doctor?
     end
   end
 
   def destroy?
     if user.present?
-      user.admin? || user.patient?
+      user.admin? || user.patient? || user.doctor?
     end
   end
 

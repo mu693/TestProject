@@ -23,4 +23,8 @@ Rails.application.routes.draw do
   resources :categories
   resources :patient_appointments
   resources :appointment_dates
+
+  # post "home/trigger_job"
+
+  # get "patient_appointments/job_done"
 end

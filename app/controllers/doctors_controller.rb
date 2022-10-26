@@ -61,7 +61,7 @@ class DoctorsController < ApplicationController
     end
 
     def doctor_params
-      params.require(:doctor).permit(:name, :description, :start_time[], :end_time[])
+      params.require(:doctor).permit(:name, :description, :rating)
     end
   
     def current_doctor

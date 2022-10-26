@@ -1,4 +1,6 @@
 class AppointmentDatesController < ApplicationController
+  before_action :authenticate_user!
+   before_action :ensure_current_user
   before_action :set_appointment_date, only: %i[ show edit update destroy ]
 
   # GET /appointment_dates or /appointment_dates.json
@@ -20,7 +22,7 @@ class AppointmentDatesController < ApplicationController
 
   # GET /appointment_dates/1/edit
   def edit
-    @appointment_date = AppointmentDate.find(params[:id])
+    @appointment_date = current_user.appointment_dates.find(params[:id])
 
      # Admin authorization
      authorize @appointment_date
@@ -32,8 +34,8 @@ class AppointmentDatesController < ApplicationController
 
     respond_to do |format|
       if @appointment_date.save
-        format.html { redirect_to appointment_date_url(@appointment_date), notice: "Doctor availability date was successfully created." }
-        format.json { render :show, status: :created, location: @appointment_date }
+        format.html { redirect_to appointment_dates_url, notice: "Doctor availability date was successfully created." }
+        format.json { render :index, status: :created, location: @appointment_date }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @appointment_date.errors, status: :unprocessable_entity }
@@ -58,7 +60,7 @@ class AppointmentDatesController < ApplicationController
 
   # DELETE /appointment_dates/1 or /appointment_dates/1.json
   def destroy
-    @appointment_date = AppointmentDate.find(params[:id])
+    @appointment_date = current_user.appointment_dates.find(params[:id])
      # Admin authorization
      authorize @appointment_date
 
