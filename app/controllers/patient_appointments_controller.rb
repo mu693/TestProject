@@ -21,7 +21,11 @@ class PatientAppointmentsController < ApplicationController
       s = params[:date].delete! '""'
       date = Date.parse(s)
       @patient_appointment = current_user.patient_appointments.create(doctor_id: params[:doctor], date: date )
+      user = current_user
+      @user = user.email
+      PatientAppointmentMailer.appointment_created(@user).deliver_now
     end
+    
     respond_to do |format|
       ##Job
       SendEmailToPatientJob.perform_later
@@ -30,23 +34,6 @@ class PatientAppointmentsController < ApplicationController
       format.html { redirect_to patient_appointments_url, notice: "Appointment was successfully created." }
     end
   end
-  
-  # def edit
-  #   @patient_appointment = PatientAppointment.find(params[:id])
-  #   # Admin authorization
-  #   authorize @patient_appointment
-  # end
-  # def update
-  #   respond_to do |format|
-  #     if @patient_appointment.update(doctor_id: params[:doctor], date: date)
-  #       format.html { redirect_to patient_appointments_url, notice: "Appointment was successfully updated." }
-  #       format.json { render :index, status: :ok, location: @patient_appointment }
-  #     else
-  #       format.html { render :edit, status: :unprocessable_entity }
-  #       format.json { render json: @patient_appointment.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
 
   def show
     @patient_appointment = PatientAppointment.find(params[:id])

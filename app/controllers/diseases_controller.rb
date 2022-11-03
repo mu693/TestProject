@@ -10,8 +10,7 @@ class DiseasesController < ApplicationController
     
     #Searching
     if params[:search].present?
-      @search_disease = Disease.where("name ILIKE ?", "%#{params[:search]}%") 
-    else
+      @search_disease = Disease.searched(params[:search])
     end  
 
      #Downloading record

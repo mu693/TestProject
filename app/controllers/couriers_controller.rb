@@ -9,8 +9,7 @@ class CouriersController < ApplicationController
   @pagy, @couriers = pagy(Courier.all)
 
     if params[:search].present?
-      @search_courier = Courier.where("name ILIKE ?", "%#{params[:search]}%")
-
+      @search_courier = Courier.searched(params[:search])
       respond_to do |format|
         format.js
       end

@@ -1,7 +1,8 @@
 class SendEmailToPatientJob < ApplicationJob
-  # include Sidekiq::Job
+  queue_as :mailer
 
-  def perform(*args)
-    # Do something
+  def perform(user)
+    user = User.where(role: "patient")
+    user.appointment_created
   end
 end

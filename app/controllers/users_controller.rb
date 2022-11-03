@@ -25,12 +25,6 @@ class UsersController < ApplicationController
 
   def create  
     @user = User.where(role: "doctor").(user_params)
-    # respond_to do |format|
-    #   if @courier.save
-    #     format.html { redirect_to users_url, notice: "User was successfully created." }
-    #     format.json { render :index, status: :created, location: @user }
-    #   end
-    # end
   end  
     
     def edit

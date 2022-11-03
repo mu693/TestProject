@@ -8,7 +8,7 @@ class MedicinesController < ApplicationController
    @pagy, @medicines = pagy(Medicine.all)
 
     if params[:search].present?
-      @search_medicine = Medicine.where("name ILIKE ?", "%#{params[:search]}%")
+      @search_medicine = Medicine.searched(params[:search])
     else
     end  
 

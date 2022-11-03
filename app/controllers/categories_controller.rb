@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
   @pagy, @categories = pagy(Category.all)
 
     if params[:search].present?
-      @search_category = Category.where("name ILIKE ?", "%#{params[:search]}%")
+      @search_category = Category.searched(params[:search])
 
       respond_to do |format|
         format.js
