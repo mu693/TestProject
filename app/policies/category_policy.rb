@@ -1,39 +1,36 @@
 class CategoryPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
-    def resolve
-     
-    end
+    def resolve; end
   end
 
   def index?
-    if user.present?
-      user.admin? || user.patient?
-    end
+    return unless user.present?
+
+    user.admin? || user.patient?
   end
 
   def create?
-    if user.present?
-      user.admin?
-    end
+    return unless user.present?
+
+    user.admin?
   end
 
   def update?
-    if user.present?
-      user.admin?
-    end
+    return unless user.present?
+
+    user.admin?
   end
 
   def show?
-    if user.present?
-      user.admin? || user.patient?
-    end
+    return unless user.present?
+
+    user.admin? || user.patient?
   end
 
   def destroy?
-    if user.present?
-      user.admin? 
-    end
-  end
+    return unless user.present?
 
+    user.admin?
+  end
 end

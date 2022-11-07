@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   resources :appointment_dates
-  
+
   ## Devise
   devise_for :users
 
   ## Letter_opener
-  #mount LetterOpenerWeb::Engine, at: '/letter_opener'
-  
+  # mount LetterOpenerWeb::Engine, at: '/letter_opener'
+
   ## >>>>>> Root >>>>>>>>
   root to: 'home#index'
-  
+
   ## Resources
   resources :users
   resources :medicines
@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   resources :patient_appointments
   resources :appointment_dates
 
-  # post "home/trigger_job"
-
-  # get "patient_appointments/job_done"
+  # require 'sidekiq-ent/web'
+  mount Sidekiq::Web => '/sidekiq'
 end

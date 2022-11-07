@@ -1,1 +1,1 @@
-json.partial! "couriers/courier", courier: @courier
+json.partial! 'couriers/courier', courier: @courier

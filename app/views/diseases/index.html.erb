@@ -45,12 +45,10 @@
                     <%= d.name %><%=  (d == disease.doctors&.last) ? "" : "," %>
                   <% end %>
                 </td>
-                <% if current_user.admin? %>
-                  <td><%= link_to "Edit", edit_disease_url(disease), class: "btn btn-warning float-right"%></td>
-                  <td><%= link_to "Show", disease_url(disease), class: "btn btn-success float-right"%></td>
-                  <td><%= button_to 'Delete', disease_path(disease), class: "btn btn-danger float-right", method: 'delete' %></td>
-                  <td><%= link_to 'Download', disease_path(disease, format: :pdf), class: "btn btn-secondary float-right" %></td>
-                <% end %>  
+                <td><%= link_to "Edit", edit_disease_url(disease), class: "btn btn-warning float-right"%></td>
+                <td><%= link_to "Show", disease_url(disease), class: "btn btn-success float-right"%></td>
+                <td><%= button_to 'Delete', disease_path(disease), class: "btn btn-danger float-right", method: 'delete' %></td>
+                <td><%= link_to 'Download', disease_path(disease, format: :pdf), class: "btn btn-secondary float-right" %></td>
               </tr>
             <% end %>
           </tbody>

@@ -1,7 +1,6 @@
 class Disease < ApplicationRecord
+  enum :status, %i[active inactive]
 
-  enum :status, [ :active, :inactive ]
-  
   validates_presence_of :name, :code, :status
 
   # Association
@@ -12,16 +11,15 @@ class Disease < ApplicationRecord
   has_many :disease_doctors
   has_many :doctors, through: :disease_doctors, dependent: :destroy
 
-  scope :searched, -> (name) { where("name ILIKE ?", "%#{name}%") }
+  scope :searched, ->(name) { where('name ILIKE ?', "%#{name}%") }
 
-  #class method
-  #def self.get_all_diseases
+  # class method
+  # def self.get_all_diseases
   #  disease = self.all
-  #end
+  # end
 
-  #instance method
-  #def get_all_diseases
+  # instance method
+  # def get_all_diseases
   #  disease = self.all
-  #end
+  # end
 end
- 

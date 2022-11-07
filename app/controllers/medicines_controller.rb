@@ -2,26 +2,22 @@ class MedicinesController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_current_user
   respond_to :html, :json, :js
-  before_action :set_medicine, only: %i[ show edit update destroy ]
+  before_action :set_medicine, only: %i[show edit update destroy]
 
   def index
-   @pagy, @medicines = pagy(Medicine.all)
+    @pagy, @medicines = pagy(Medicine.all)
 
-    if params[:search].present?
-      @search_medicine = Medicine.searched(params[:search])
-    else
-    end  
+    @search_medicine = Medicine.searched(params[:search]) if params[:search].present?
 
-    #Downloading record
+    # Downloading record
     respond_to do |format|
       format.html
       format.js
       format.pdf do
-        render pdf: "Medicines", template: "medicines/medicine_records", formats: [:html]
+        render pdf: 'Medicines', template: 'medicines/medicine_records', formats: [:html]
       end
     end
   end
-
 
   def new
     @medicine = Medicine.new
@@ -29,13 +25,13 @@ class MedicinesController < ApplicationController
     # Admin authorization
     authorize @medicine
   end
-  
+
   def create
     @medicine = current_user.medicines.new(medicine_params)
 
     respond_to do |format|
       if @medicine.save
-        format.html { redirect_to medicines_url, notice: "Medicine was successfully created." }
+        format.html { redirect_to medicines_url, notice: 'Medicine was successfully created.' }
         format.json { render :index, status: :created, location: @medicine }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -55,7 +51,7 @@ class MedicinesController < ApplicationController
     @medicine = Medicine.find(params[:id])
     respond_to do |format|
       if @medicine.update(medicine_params)
-        format.html { redirect_to medicines_url, notice: "Medicine was successfully updated." }
+        format.html { redirect_to medicines_url, notice: 'Medicine was successfully updated.' }
         format.json { render :index, status: :ok, location: @medicine }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -69,7 +65,7 @@ class MedicinesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "file_name", template: "medicines/medicine", formats: [:html]
+        render pdf: 'file_name', template: 'medicines/medicine', formats: [:html]
       end
     end
   end
@@ -82,22 +78,22 @@ class MedicinesController < ApplicationController
 
     @medicine.destroy
     respond_to do |format|
-      format.html { redirect_to medicines_url, notice: "Selected Medicine was successfully destroyed." }
+      format.html { redirect_to medicines_url, notice: 'Selected Medicine was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-   
-    def set_medicine
-      @medicine = Medicine.find(params[:id])
-    end
 
-    def medicine_params
-      params.require(:medicine).permit(:name, :description, :quantity, :price, :manfucturing_date, :expiry_date)
-    end
+  def set_medicine
+    @medicine = Medicine.find(params[:id])
+  end
 
-    def current_medicine
-      @medicine = Medicine.find(params[:id])
-    end
+  def medicine_params
+    params.require(:medicine).permit(:name, :description, :quantity, :price, :manfucturing_date, :expiry_date)
+  end
+
+  def current_medicine
+    @medicine = Medicine.find(params[:id])
+  end
 end

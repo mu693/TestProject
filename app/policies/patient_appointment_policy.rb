@@ -1,21 +1,19 @@
 class PatientAppointmentPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
-    def resolve
-     
-    end
+    def resolve; end
   end
 
   def index?
-    if user.present?
-      user.admin? || user.patient? || user.doctor?
-    end
+    return unless user.present?
+
+    user.admin? || user.patient? || user.doctor?
   end
 
   def create?
-    if user.present?
-      user.patient?
-    end
+    return unless user.present?
+
+    user.patient?
   end
 
   # def update?
@@ -25,15 +23,14 @@ class PatientAppointmentPolicy < ApplicationPolicy
   # end
 
   def show?
-    if user.present?
-      user.admin? || user.patient? || user.doctor?
-    end
+    return unless user.present?
+
+    user.admin? || user.patient? || user.doctor?
   end
 
   def destroy?
-    if user.present?
-      user.admin? || user.patient? || user.doctor?
-    end
-  end
+    return unless user.present?
 
+    user.admin? || user.patient? || user.doctor?
+  end
 end
