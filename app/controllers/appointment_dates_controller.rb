@@ -34,14 +34,11 @@ class AppointmentDatesController < ApplicationController
 
   def update
     @appointment_date = AppointmentDate.find(params[:id])
-    respond_to do |format|
+    respond_to do |format|dates
       if @appointment_date.update(appointment_date_params)
-        format.html do
-          redirect_to appointment_dates_url
-          flash[:notice] = 'Doctor availability date was successfully updated.'
-        else
-          format.html { render :edit, status: :unprocessable_entity }  
-        end
+        format.html { redirect_to appointment_dates_url, notice: 'Doctor availability date was successfully updated.' } 
+      else
+        format.html { render :edit, status: :unprocessable_entity }  
       end
     end
   end

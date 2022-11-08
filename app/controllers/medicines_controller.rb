@@ -17,8 +17,8 @@ class MedicinesController < ApplicationController
   end
 
   def new
-    authorize @medicine
     @medicine = Medicine.new
+    authorize @medicine
   end
 
   def create

@@ -1,6 +1,0 @@
-<%= simple_form_for(@patient_appointment) do |f| %>
-  <div class="mb-3">
-    <%= f.label :appointment_approval %>
-    <%= f.select :appointment_approval, options_for_select(PatientAppointment.appointment_approvals.keys), { class: "appointment-approval" } %>
-  </div>             
-<% end %>  
