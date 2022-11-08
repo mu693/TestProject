@@ -13,14 +13,11 @@ class DoctorsController < ApplicationController
 
   def create
     @doctor = Doctor.new(doctor_params)
-
     respond_to do |format|
       if @courier.save
         format.html { redirect_to doctors_url, notice: 'Doctor was successfully created.' }
-        format.json { render :index, status: :created, location: @doctor }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @doctor.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -33,10 +30,8 @@ class DoctorsController < ApplicationController
     respond_to do |format|
       if @courier.update(courier_params)
         format.html { redirect_to doctors_url, notice: 'Doctor was successfully updated.' }
-        format.json { render :index, status: :ok, location: @doctor }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @doctor.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -51,7 +46,6 @@ class DoctorsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to doctors_url, notice: 'Selected doctor was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -62,7 +56,7 @@ class DoctorsController < ApplicationController
   end
 
   def doctor_params
-    params.require(:doctor).permit(:name, :description, :rating)
+    params.require(:doctor).permit(:name, :description)
   end
 
   def current_doctor

@@ -6,4 +6,5 @@ class Doctor < ApplicationRecord
 
   has_many :users, through: :patient_appointments
   has_many :appointment_dates
+
 end

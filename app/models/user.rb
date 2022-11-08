@@ -6,8 +6,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :timeoutable, :trackable
 
-  enum approved: %i[false true]
-
   # User roles
   enum role: %i[admin patient doctor]
   after_initialize :set_default_role, if: :new_record?

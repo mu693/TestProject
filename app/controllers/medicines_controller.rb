@@ -6,10 +6,7 @@ class MedicinesController < ApplicationController
 
   def index
     @pagy, @medicines = pagy(Medicine.all)
-
     @search_medicine = Medicine.searched(params[:search]) if params[:search].present?
-
-    # Downloading record
     respond_to do |format|
       format.html
       format.js
@@ -20,31 +17,24 @@ class MedicinesController < ApplicationController
   end
 
   def new
-    @medicine = Medicine.new
-
-    # Admin authorization
     authorize @medicine
+    @medicine = Medicine.new
   end
 
   def create
     @medicine = current_user.medicines.new(medicine_params)
-
     respond_to do |format|
       if @medicine.save
         format.html { redirect_to medicines_url, notice: 'Medicine was successfully created.' }
-        format.json { render :index, status: :created, location: @medicine }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @medicine.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def edit
-    @medicine = Medicine.find(params[:id])
-
-    # Admin authorization
     authorize @medicine
+    @medicine = Medicine.find(params[:id])
   end
 
   def update
@@ -52,10 +42,8 @@ class MedicinesController < ApplicationController
     respond_to do |format|
       if @medicine.update(medicine_params)
         format.html { redirect_to medicines_url, notice: 'Medicine was successfully updated.' }
-        format.json { render :index, status: :ok, location: @medicine }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @medicine.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -79,7 +67,6 @@ class MedicinesController < ApplicationController
     @medicine.destroy
     respond_to do |format|
       format.html { redirect_to medicines_url, notice: 'Selected Medicine was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

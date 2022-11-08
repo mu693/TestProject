@@ -19,7 +19,7 @@ class Disease < ApplicationRecord
   # end
 
   # instance method
-  # def get_all_diseases
-  #  disease = self.all
-  # end
+  def get_all_diseases
+   disease = self.all
+  end
 end
