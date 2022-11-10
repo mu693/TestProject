@@ -9,9 +9,8 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-
     respond_to do |format|
+      @user.destroy
       format.html { redirect_to users_url, notice: 'Selected User was successfully destroyed.' }
       format.json { head :no_content }
     end

@@ -1,4 +1,5 @@
 class Medicine < ApplicationRecord
+  include Allmodels
   belongs_to :user
 
   # Association

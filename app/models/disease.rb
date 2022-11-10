@@ -1,4 +1,5 @@
 class Disease < ApplicationRecord
+  include Allmodels
   enum :status, %i[active inactive]
 
   validates_presence_of :code, :status
