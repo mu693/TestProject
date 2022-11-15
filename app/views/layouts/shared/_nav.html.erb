@@ -12,7 +12,7 @@
             <% if user_signed_in? %>
               <li class="nav-item"><%= link_to "Profile", root_path, class: "btn btn-dark" %></li>
               <% if current_user.admin? || current_user.doctor? %>
-                <li class="nav-item"><%= link_to "Doctor Availability", appointment_dates_path, class: "btn btn-dark" %></li>
+                <li class="nav-item"><%= link_to "Checkup Time", appointment_dates_path, class: "btn btn-dark" %></li>
               <% end %>  
               <li class="nav-item"><%= link_to "Appointment", patient_appointments_path, class: "btn btn-dark" %></li>
               <% if current_user.admin? || current_user.doctor? %>
