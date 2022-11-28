@@ -40,15 +40,20 @@
                     <%= m.name %><%=  (m == disease.medicines&.last) ? "" : "," %>
                   <% end %>
                 </td>
-                <td>
-                  <% disease.doctors&.each do |d| %>
-                    <%= d.name %><%=  (d == disease.doctors&.last) ? "" : "," %>
-                  <% end %>
-                </td>
-                <td><%= link_to "Edit", edit_disease_url(disease), class: "btn btn-warning float-right"%></td>
-                <td><%= link_to "Show", disease_url(disease), class: "btn btn-success float-right"%></td>
-                <td><%= button_to 'Delete', disease_path(disease), class: "btn btn-danger float-right", method: 'delete' %></td>
-                <td><%= link_to 'Download', disease_path(disease, format: :pdf), class: "btn btn-secondary float-right" %></td>
+                <%
+=begin%>
+ <% user_id = UserDisease.find_by(disease_id: disease.id).user_id %>
+                <% if user_id.present?%>
+                  <td><%= User.find(user_id).name %> <%= User.find(user_id).lname %></td>
+                <% end %>      
+<%
+=end%>
+                <% if current_user.admin? %>
+                  <td><%= link_to "Edit", edit_disease_url(disease), class: "btn btn-warning float-right"%></td>
+                  <td><%= link_to "Show", disease_url(disease), class: "btn btn-success float-right"%></td>
+                  <td><%= button_to 'Delete', disease_path(disease), class: "btn btn-danger float-right", method: 'delete' %></td>
+                  <td><%= link_to 'Download', disease_path(disease, format: :pdf), class: "btn btn-secondary float-right" %></td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>

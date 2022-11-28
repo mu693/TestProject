@@ -4,8 +4,8 @@ class PatientAppointmentMailer < ApplicationMailer
     mail(
       to: @user,
       from: 'admin_rtc@gmail.com',
-      subject: 'Appointment created'
-      # body: "Appointment has been successfully created. Please review it."
+      subject: 'Appointment created',
+      body: 'Appointment has been successfully created. Please review it.'
     )
   end
 end

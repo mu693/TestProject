@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  include Allmodels
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # after_create :send_admin_mail
@@ -21,11 +20,14 @@ class User < ApplicationRecord
   has_many :couriers
   has_many :categories
   has_many :patient_appointments
-  has_many :doctors, through: :patient_appointments
+  has_many :appointment_dates
+
+  has_many :user_diseases
+  has_many :diseases, through: :user_diseases, dependent: :destroy
 
   has_one_attached :avatar
 
-  validates_presence_of :name, :lname, :avatar
+  validates_presence_of :name, :lname
 
   scope :all_except, ->(user) { where.not(id: user) }
 end

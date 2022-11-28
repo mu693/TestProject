@@ -30,12 +30,19 @@
               <label>Last Name</label>
               <%= f.text_field :lname, autofocus: true, autocomplete: "lname" %>
             </div>
-           
-            <div class="mb-3">
-              <%= f.label :approved, { class: "form-label" } %>
-              <%= f.select :approved, options_for_select(User.approveds.keys), { class: "User Approved" } %>
-            </div>  
 
+            <% if current_user.doctor? %>
+              <div class="mb-3">
+                <label>Specialization</label>
+                <%= f.text_field :specialization %>
+              </div>
+
+              <div class="mb-3">
+                <label>Experience</label>
+                <%= f.text_field :experience %>
+              </div>
+            <% end %>
+           
             <div class="mb-3">
               <div class="field">
                 <%= f.label :email %><br />
@@ -43,19 +50,17 @@
               </div>
             </div>  
            
-            <% if devise_mapping.confirmable? && resource.43'_reconfirmation? %>
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
             <% end %>
-           
-            <div class="mb-3">
-              <div class="field">
-                <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-                <%= f.password_field :password, autocomplete: "new-password" %>
-                <% if @minimum_password_length %>
-                  <br />
-                  <em><%= @minimum_password_length %> characters minimum</em>
-                <% end %>
-              </div>
+            <br>
+            <div class="field">
+              <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+              <%= f.password_field :password, autocomplete: "new-password" %>
+              <% if @minimum_password_length %>
+                <br />
+                <em><%= @minimum_password_length %> characters minimum</em>
+              <% end %>
             </div>
            
             <div class="mb-3">  
@@ -87,7 +92,7 @@
 <% end %>
 
 <script>
- function readURL(input) {
+  function readURL(input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader();
 

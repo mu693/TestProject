@@ -15,6 +15,9 @@
                 <li class="nav-item"><%= link_to "Checkup Time", appointment_dates_path, class: "btn btn-dark" %></li>
               <% end %>  
               <li class="nav-item"><%= link_to "Appointment", patient_appointments_path, class: "btn btn-dark" %></li>
+              <% if current_user.patient? %>
+                <li class="nav-item"><%= link_to "Doctors", all_doctor_patient_appointments_path, class: "btn btn-dark" %></li>
+              <% end %>  
               <% if current_user.admin? || current_user.doctor? %>
                 <li class="nav-item"><%= link_to "Diseases", diseases_path, class: "btn btn-dark" %></li>
                 <li class="nav-item"><%= link_to "Medicines", medicines_path, class: "btn btn-dark" %></li>

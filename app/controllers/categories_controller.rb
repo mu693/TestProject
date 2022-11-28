@@ -6,6 +6,7 @@ class CategoriesController < ApplicationController
   def index
     @pagy, @categories = pagy(Category.all)
     return unless params[:search].present?
+
     @search_category = Category.searched(params[:search])
     respond_to do |format|
       format.js

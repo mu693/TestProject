@@ -28,6 +28,23 @@
   width: 250px;
 }
 
+.appointment-btn {
+  margin-left: 950px;
+  margin-bottom: 20px;
+}
+
+.doctor_availability {
+  color: red;
+}
+
+.checkup_time {
+  color: green;
+}
+
+.doctor_details {
+  color: blue;
+}
+
 @import "simple_calendar";
 
 .simple-calendar {

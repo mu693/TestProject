@@ -21,9 +21,14 @@ Rails.application.routes.draw do
   resources :users
   resources :couriers
   resources :categories
-  resources :patient_appointments
+  resources :patient_appointments do
+    collection do
+      get 'all_doctor'
+      get 'history'
+    end
+  end
   resources :appointment_dates
 
   # require 'sidekiq-ent/web'
-  mount Sidekiq::Web => '/sidekiq'
+  # mount Sidekiq::Web => '/sidekiq'
 end

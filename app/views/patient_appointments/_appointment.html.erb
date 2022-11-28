@@ -6,10 +6,8 @@
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
       <div id="container">   
         <div class="mb-3">
-          
-          <%= f.association :doctor, 
-            label_method: lambda { |doctor| "#{doctor.name}"},
-            :label => "Select Doctor:",
+           <%= f.association :user, :collection => User.where(role: "doctor").map{ |doctor| [doctor.name, doctor.id]},
+            :label => "Select Docotrs:",
             as: :select, 
             input_html: { class: "value-selector date-select select-doctor" }, 
             item_wrapper_class: 'value-item'
@@ -34,13 +32,14 @@
 </div>
 
 <script>
- var doctor;
+ var user;
  var date;
 
   $( function() {
-    $('.date-select').on('select2:select', function (e){
-      doctor = e.target.value
-      get_ajax(doctor)
+    $('.date-select').on('change', function (e){
+      user = e.target.value
+   
+      get_ajax(user)
     })
   });
   
@@ -53,15 +52,16 @@
     response = $.ajax({
         url: '/patient_appointments',
         method: 'Post',
-        data: {date, doctor}
+        data: {date, user}
     });
   }
   
-  function get_ajax(doctor){
+  function get_ajax(user){
     response = $.ajax({
         url: '/patient_appointments/new',
         method: 'Get',
-        data: {doctor}
+        format: 'js',
+        data: {user}
     });
   }
 

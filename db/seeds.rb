@@ -6,46 +6,68 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Doctor.create!([{
-                 name: 'Nasim Ashraf',
-                 description: 'Viral Diseases'
-               },
-                {
-                  name: 'Mohsin Mighiana',
-                  description: 'Asthma'
-                },
-                {
-                  name: 'Shazia Aslam',
-                  description: 'Dengue'
-                },
-                {
-                  name: 'Shafiq-ur-Rahman',
-                  description: 'Cardiologist'
-                },
-                {
-                  name: 'Amar Moosa',
-                  description: 'Diphtheria'
-                },
-                {
-                  name: 'Mohammad Rashid Zia',
-                  description: 'ENT'
-                },
-                {
-                  name: 'Faisal Masood',
-                  description: 'Diabetes'
-                },
-                {
-                  name: 'Hafiz Abdul Majid',
-                  description: 'Neurologist'
-                }])
-p "Created #{Doctor.count} Doctors"
+User.create!([{
+               name: 'Dr.Amar',
+               lname: 'Moosa',
+               email: 'doctor1@gmail.com',
+               role: 'doctor',
+               specialization: 'Diagnostic Survey',
+               password: '123456',
+               password_confirmation: '123456'
+             },
+              {
+                name: 'Dr.Ali',
+                lname: 'Shakeel',
+                email: 'doctor2@gmail.com',
+                role: 'doctor',
+                specialization: 'Management Of Diabetis',
+                password: '123456',
+                password_confirmation: '123456'
+              },
+              {
+                name: 'Dr.Brig.Khalid',
+                lname: 'Amjad',
+                email: 'doctor3@gmail.com',
+                role: 'doctor',
+                specialization: 'Electrocardiogram(Ecg/Ekg)',
+                password: '123456',
+                password_confirmation: '123456'
+              },
+              {
+                name: 'Dr.Ajmal',
+                lname: 'Osman',
+                email: 'doctor4@gmail.com',
+                role: 'doctor',
+                specialization: 'Diagnosing, Electrocardiogram(Ecg/Ekg)',
+                password: '123456',
+                password_confirmation: '123456'
+              },
+              {
+                name: 'Dr.Shahbaz',
+                lname: 'Ashraf',
+                email: 'doctor5@gmail.com',
+                role: 'doctor',
+                specialization: 'Pulmonary Disease',
+                password: '123456',
+                password_confirmation: '123456'
+              },
+              {
+                name: 'Dr.Amna',
+                lname: 'Iqbal',
+                email: 'doctor6@gmail.com',
+                role: 'doctor',
+                specialization: 'MCPS(Community Medicine)',
+                password: '123456',
+                password_confirmation: '123456'
+              }])
+
+# p "Created #{Doctor.count} Doctors"
 
 User.create(
   name: 'Irum',
   lname: 'Mushtaq',
   email: 'admin_rtc@gmail.com',
   role: 'admin',
-  approved: 'true',
   password: '123456',
   password_confirmation: '123456'
 )

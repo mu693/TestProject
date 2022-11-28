@@ -16,12 +16,6 @@ class PatientAppointmentPolicy < ApplicationPolicy
     user.patient?
   end
 
-  # def update?
-  #   if user.present?
-  #     user.patient?
-  #   end
-  # end
-
   def show?
     return unless user.present?
 
@@ -31,6 +25,6 @@ class PatientAppointmentPolicy < ApplicationPolicy
   def destroy?
     return unless user.present?
 
-    user.admin? || user.patient? || user.doctor?
+    user.patient?
   end
 end

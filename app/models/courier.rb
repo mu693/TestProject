@@ -1,5 +1,5 @@
 class Courier < ApplicationRecord
-  include Allmodels
+  include Searchqueries
   belongs_to :user
   validates_presence_of :address, :code, :contact_no
 

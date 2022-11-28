@@ -1,0 +1,34 @@
+     <!--All Doctor-->
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3">
+    <%- @users.each do |user| %>
+      <div class="col mb-4">
+        <div class="col-9">
+          <div class="card h-100">
+            <div class="card-body">
+              <% if user.avatar.present? %>
+                <%= image_tag(user.avatar, width: 100, height: 100) %>
+              <% end %>
+              <br />
+              <b>Doctor Name:</b><h6 class="doctor_details"><%= user.name %>  <%= user.lname %></h6>
+              <% if user.specialization.present? || user.experience.present? %>
+                <b>Specialization:</b><h6 class="doctor_details"> <%= user.specialization %></h6>
+                <b>Experience:</b><h6 class="doctor_details"> <%= user.experience %> Years</h6>
+              <% end %>
+              <% if user.appointment_dates.present?%>
+                <% user.appointment_dates.each_with_index do |date, index| %>
+                  <b class="checkup_time">Checkup Time <%= index + 1 %>:</b>
+                  <%= date.start_time %><br>
+                  <strong>To</strong>
+                  <%= date.end_time %><br><br>
+                <% end %>
+              <% else %>  
+                <p class="doctor_availability">Currently not available</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -5,28 +5,14 @@
       <h2>Doctor Appointment Dates</h2>
         <div class="card">
           <div class="card-body">
-            <%= simple_form_for(@appointment_date) do |f| %>
-              <%= f.error_notification %>
-              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-              <div class="form-inputs">
-                <div class="mb-3">
-                  <legend>Doctors:</legend>
-                  <%= f.association :doctor, 
-                    label_method: lambda { |doctor| "#{doctor.name}"},
-                    :label => "Select Docotrs:",
-                    as: :select, 
-                    input_html: { class: "value-selector" },
-                    item_wrapper_class: 'value-item select-2'
-                  %>
-                </div>
-                
+            <%= form_for AppointmentDate.new do |f| %>
+             
                 <div class="mt-3">
-                  <%= f.input :start_time %>
+                  <%= f.datetime_select :start_time %>
                 </div>
-
+                <%= f.hidden_field :user_id , value: current_user.id %>
                 <div class="mt-3 mb-3">
-                  <%= f.input :end_time %>
+                  <%= f.datetime_select :end_time %>
                 </div>  
               </div>
 

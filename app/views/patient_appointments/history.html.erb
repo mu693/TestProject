@@ -1,0 +1,17 @@
+<div class="container-fluid text-center">
+  <div class="row justify-content-center">
+    <h5> Previous Appointments </h5>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <% @patient_appointments.each do |patient_appointment| %>
+            <div class="mb-3">
+              <strong> Appointment_Date: </strong>
+              <%= patient_appointment.date.strftime("%d/%m/%Y") %><br />
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

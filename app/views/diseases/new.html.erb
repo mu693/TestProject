@@ -37,22 +37,13 @@
               </div>
                  
               <div class="mb-3">
-                <%= f.association :doctors, 
-                  label_method: lambda { |doctors| "#{doctors.name}"},
+                <%= f.association :user, :collection => User.doctor.map{ |doctor| [doctor.name, doctor.id]},
                   :label => "Select Docotrs:",
                   as: :select, 
-                  input_html: { class: "value-selector" },
-                  item_wrapper_class: 'value-item select-2'
+                  input_html: { class: "value-selector" }, 
+                  item_wrapper_class: 'value-item'
                 %>
-              <div>
-              
-              <%
-=begin%>
- <div class= "doctor">
-                <%= f.select :user_id, options_for_select(User.where(role: "doctor").collect { | user | [user.name, user.id] } ) %>
-              </div>   
-<%
-=end%>
+              </div>
 
               <div class="mt-3 form-actions">
                 <%= f.button :submit, class:"btn btn-primary" %>

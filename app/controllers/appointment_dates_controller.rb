@@ -4,7 +4,10 @@ class AppointmentDatesController < ApplicationController
   before_action :set_appointment_date, only: %i[show edit update destroy]
 
   def index
-    @appointment_dates = AppointmentDate.all
+    @appointment_dates = AppointmentDate.all if current_user.admin?
+    return unless current_user.doctor?
+
+    @appointment_dates = current_user.appointment_dates.all
   end
 
   def show
@@ -22,29 +25,26 @@ class AppointmentDatesController < ApplicationController
   end
 
   def create
-    @appointment_date = AppointmentDate.new(appointment_date_params)
-    respond_to do |format|
-      if @appointment_date.save
-        format.html { redirect_to appointment_dates_url, notice: 'Doctor availability date was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_entity }  
-      end
-    end
+    @appointment_date = AppointmentDate.create(appointment_date_params)
+    redirect_to appointment_dates_url
   end
 
   def update
     @appointment_date = AppointmentDate.find(params[:id])
-    respond_to do |format|dates
+    respond_to do |format|
+      dates
       if @appointment_date.update(appointment_date_params)
-        format.html { redirect_to appointment_dates_url, notice: 'Doctor availability date was successfully updated.' } 
+        format.html do
+          redirect_to appointment_dates_url, notice: 'Doctor availability date was successfully updated.'
+        end
       else
-        format.html { render :edit, status: :unprocessable_entity }  
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @appointment_date = current_user.appointment_dates.find(params[:id])
+    @appointment_date = AppointmentDate.find(params[:id])
     authorize @appointment_date
     @appointment_date.destroy
     respond_to do |format|
@@ -59,6 +59,6 @@ class AppointmentDatesController < ApplicationController
   end
 
   def appointment_date_params
-    params.require(:appointment_date).permit(:doctor_id, :start_time, :end_time)
+    params.require(:appointment_date).permit(:start_time, :end_time, :user_id)
   end
 end

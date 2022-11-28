@@ -23,7 +23,7 @@ class CouriersController < ApplicationController
       if @courier.save
         format.html { redirect_to couriers_url, notice: 'Courier was successfully created.' }
       else
-        format.html { render :new, status: :unprocessable_entity }  
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -37,7 +37,7 @@ class CouriersController < ApplicationController
       if @courier.update(courier_params)
         format.html { redirect_to couriers_url, notice: 'Courier was successfully updated.' }
       else
-        format.html { render :edit, status: :unprocessable_entity }  
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end

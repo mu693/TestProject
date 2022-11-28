@@ -1,5 +1,5 @@
 class Medicine < ApplicationRecord
-  include Allmodels
+  include Searchqueries
   belongs_to :user
 
   # Association
