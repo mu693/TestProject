@@ -15,7 +15,7 @@
  *= require select2-bootstrap
  *= require jquery.rateyo
  */
-
+ 
  .btn-group .edit {
   margin-right: 7px;
  }
@@ -43,6 +43,15 @@
 
 .doctor_details {
   color: blue;
+}
+
+.notification_text {
+  color: darkred;
+}
+
+.index_text {
+  color: darkblue;
+  font-weight: bold;
 }
 
 @import "simple_calendar";
