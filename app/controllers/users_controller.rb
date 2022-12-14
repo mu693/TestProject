@@ -2,9 +2,8 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # @currently_user = current_user.id
     @users = User.all_except(current_user)
-  end
+  end  
 
   def destroy
     @user = User.find(params[:id])
