@@ -94,3 +94,6 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem "noticed", "~> 1.6"
+gem 'redis-namespace'
+gem 'bootstrap'

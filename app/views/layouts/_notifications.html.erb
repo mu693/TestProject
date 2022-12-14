@@ -1,0 +1,20 @@
+<li class="nav-item dropdown position-relative not__dropdown ">
+  <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <%= render 'layouts/test' %>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
+        <div id="notification_data">
+          <%- @notifications.each_with_index do |notification, index| %>
+            <li>
+              <div class="index_text"> 
+                <%= index+1 %> 
+              </div> 
+              <div class="notification_text"> 
+                Appointment booked to you by   
+                <%= User.find(notification.user_id).name %> <%= User.find(notification.user_id).lname %> 
+              </div>             
+            </li>  
+          <% end %> 
+        </div>
+    </ul>
+</li>
