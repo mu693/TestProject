@@ -18,11 +18,11 @@
               <%= date.day %>
               <% appointment_dates.each do |appointment_date| %>
                 <div class="single_event">
-                  <%#= link_to appointment_date.doctor.name, appointment_date %>
+                  <%#= link_to appointment_date.user.name, appointment_date %>
                 </div>
               <% end %>
             <% end %>       
-          <% end %>  
+          <% end %>
         </div>
         <div class="form-actions mt-3">
           <%= f.button :submit, onclick:"send_ajax()", class:"btn btn-primary" %>
@@ -52,6 +52,7 @@
     response = $.ajax({
         url: '/patient_appointments',
         method: 'Post',
+        format: 'js',
         data: {date, user}
     });
   }
