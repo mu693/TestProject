@@ -21,10 +21,9 @@ class User < ApplicationRecord
   has_many :categories
   has_many :patient_appointments
   has_many :appointment_dates
-
   has_many :user_diseases
   has_many :diseases, through: :user_diseases, dependent: :destroy
-
+  has_many :notifications, :as => :notifiable
   has_one_attached :avatar
 
   validates_presence_of :name, :lname
