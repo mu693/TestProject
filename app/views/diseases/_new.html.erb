@@ -55,7 +55,7 @@
 
   $.ajax({
   type: ‘POST’,
-  url: ‘/couriers,
+  url: ‘/diseases,
   beforeSend: function(xhr) {xhr.setRequestHeader(“X-CSRF-Token”, $(“meta[name=‘csrf-token’]“).attr(“content”))},
   data: send_data,
   dataType: ‘script’,
