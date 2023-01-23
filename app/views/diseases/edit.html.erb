@@ -32,21 +32,11 @@
                   label_method: lambda { |medicines| "#{medicines.name} - #{medicines.description}"},
                   :label => "Select Medicines:",
                   as: :select, 
-                  input_html: { class: "value-selector" },
+                  input_html: { class: "form-control value-selector" },
                   item_wrapper_class: 'value-item select-2'
                 %>
               </div>
-
-              <div class="mb-3">
-                <%= f.association :doctors, 
-                  label_method: lambda { |doctors| "#{doctors.name} - #{doctors.description}"},
-                  :label => "Select Doctors:",
-                  as: :select, 
-                  input_html: { class: "value-selector" },
-                  item_wrapper_class: 'value-item select-2'
-                %>
-              <div>
-              
+   
               <div class="mb-3">
                 <%= f.submit "Save", class: "btn btn-primary" %>
               </div>

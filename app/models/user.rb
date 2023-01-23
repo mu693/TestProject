@@ -14,6 +14,13 @@ class User < ApplicationRecord
     self.role ||= :admin
   end
 
+  PASSWORD_FORMAT = /\A
+  (?=.{8,})          # Must contain 8 or more characters
+  (?=.*\d)           # Must contain a digit
+  (?=.*[a-z])        # Must contain a lower case character
+  (?=.*[A-Z])        # Must contain an upper case character
+  (?=.*[[:^alnum:]]) # Must contain a symbol /x
+
   # Associations
   has_many :diseases
   has_many :medicines
@@ -27,6 +34,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates_presence_of :name, :lname
+  validates :password, format: { with: PASSWORD_FORMAT }, confirmation: true, on: :create, on: :update
 
   scope :all_except, ->(user) { where.not(id: user) }
 end

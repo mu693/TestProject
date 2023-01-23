@@ -4,9 +4,9 @@ class CouriersController < ApplicationController
 
   def index
     @pagy, @couriers = pagy(Courier.all)
+    @courier = current_user.couriers.new
 
     return unless params[:search].present?
-
     @search_courier = Courier.searched(params[:search])
     respond_to do |format|
       format.js
@@ -14,7 +14,10 @@ class CouriersController < ApplicationController
   end
 
   def new
-    @courier = current_user.couriers.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create

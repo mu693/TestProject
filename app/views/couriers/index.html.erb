@@ -1,8 +1,13 @@
   <!-- All Couriers Record -->
   
 <div class="container">
+ <%= link_to 'Create Courier', new_courier_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary float-right'}  %>
+  <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
   <h2>Couriers</h2>
-
   <%= render 'couriers/search' %>
  
   <br /><br /><br /><br /><br /><br /><br /><br />
@@ -40,6 +45,4 @@
       </div>
               <!--Pagination-->
       <%== pagy_bootstrap_nav(@pagy) %>
-
-      <%= link_to "Add New Courier", new_courier_path, class: "btn btn-primary" %>
       

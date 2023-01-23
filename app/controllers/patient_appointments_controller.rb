@@ -59,7 +59,9 @@ class PatientAppointmentsController < ApplicationController
   end
 
   def all_doctor
-    @users = User.where(role: 'doctor').all
+    @doctors = User.where(role: 'doctor').all
+    # debugger
+    # @appointment_dates = User.includes(user_id: params[:user]).where('start_time < ?', Time.now )
   end
 
   private

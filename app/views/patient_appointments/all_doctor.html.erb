@@ -1,7 +1,7 @@
      <!--All Doctor-->
 <div class="container">
   <div class="row row-cols-1 row-cols-md-3">
-    <%- @users.each do |user| %>
+    <%- @doctors.each do |user| %>
       <div class="col mb-4">
         <div class="col-9">
           <div class="card h-100">
@@ -17,10 +17,12 @@
               <% end %>
               <% if user.appointment_dates.present?%>
                 <% user.appointment_dates.each_with_index do |date, index| %>
-                  <b class="checkup_time">Checkup Time <%= index + 1 %>:</b>
-                  <%= date.start_time %><br>
-                  <strong>To</strong>
-                  <%= date.end_time %><br><br>
+                  <% if date.start_time > Date.today && date.end_time > Date.today %>
+                    <b class="checkup_time">Checkup Time <%= index + 1 %>:</b>
+                    <%= date.start_time %><br>
+                    <strong>To</strong>
+                    <%= date.end_time %><br><br>
+                  <% end %>
                 <% end %>
               <% else %>  
                 <p class="doctor_availability">Currently not available</p>

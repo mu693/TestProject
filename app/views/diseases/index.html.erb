@@ -1,5 +1,13 @@
            <!--All Diseases Table--> 
 <div class="container">
+  <% if current_user.admin? %>
+    <%= link_to 'Create Disease', new_disease_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary float-right'}  %>
+  <% end %>
+  <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
   <h2>Diseases</h2>
   <div class="row float-right">
     <div class="col-md-12 bg-light text-right">
@@ -40,12 +48,11 @@
                     <%= m.name %><%=  (m == disease.medicines&.last) ? "" : "," %>
                   <% end %>
                 </td>
-                <%
+                  <%
 =begin%>
- <% user_id = UserDisease.find_by(disease_id: disease.id).user_id %>
-                <% if user_id.present?%>
-                  <td><%= User.find(user_id).name %> <%= User.find(user_id).lname %></td>
-                <% end %>      
+ <% disease_doctor = Disease.find_by(user_id: @user.id) do %>
+                  <td><%= disease.disease_doctor.name %> <%= disease.disease_doctor.lname %></td>
+                  <% end %>  
 <%
 =end%>
                 <% if current_user.admin? %>
@@ -61,11 +68,6 @@
       </div>
               <!--Pagination-->
       <%== pagy_bootstrap_nav(@pagy) %>
-      
-      <% if current_user.admin? %>
-        <%= link_to "Add New Disease", new_disease_path, class: "btn btn-primary" %>
-      <% end %>
-      
       <br />
       <%= link_to 'Back', url_for(:back), class: "btn btn-primary" %>
     </div>

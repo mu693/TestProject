@@ -7,6 +7,7 @@ class DiseasesController < ApplicationController
 
   def index
     @pagy, @diseases = pagy(Disease)
+    @disease = Disease.new
     @search_disease = Disease.searched(params[:search]) if params[:search].present?
     respond_to do |format|
       format.html
@@ -18,19 +19,19 @@ class DiseasesController < ApplicationController
   end
 
   def new
-    @disease = Disease.new
-    authorize @disease
+    # authorize @disease
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
     @disease = current_user.diseases.new(disease_params)
-
     # Saving medicine in disease
     disease_medicines = params[:disease][:medicine_ids].shift
     disease_medicines = params[:disease][:medicine_ids]
-
     return unless @disease.save
-
     # medicines
     disease_medicines&.each do |m|
       @medicine = MedicineDisease.create(disease_id: @disease.id, medicine_id: m)
