@@ -26,9 +26,7 @@
           <% end %>
         </td>
         <td>
-          <% @disease.doctors&.each do |d| %>
-            <%= d.name %><%=  (d == @disease.doctors&.last) ? "" : "," %>
-          <% end %>
+          <%= @disease.user.name %> <%= @disease.user.lname %>
         </td>
         <td><td><%= link_to "Edit", edit_disease_url, class: "btn btn-warning float-right"%></td></td>
         <td><%= button_to 'Delete', disease_path, class: "btn btn-danger float-right", method: 'delete' %></td>
