@@ -55,6 +55,9 @@
                   <% end %>  
 <%
 =end%>
+                <% if disease.user.present? %>
+                  <td><%= disease.user.name %>  <%= disease.user.lname %></td>
+                <% end %> 
                 <% if current_user.admin? %>
                   <td><%= link_to "Edit", edit_disease_url(disease), class: "btn btn-warning float-right"%></td>
                   <td><%= link_to "Show", disease_url(disease), class: "btn btn-success float-right"%></td>
